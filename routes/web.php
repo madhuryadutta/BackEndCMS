@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\EditorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('ckeditor/image_upload', 'EditorController@upload')->name('upload');
+Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
+Route::post('create_post', [ContentController::class, 'create_post'])->name('create_post');
