@@ -24,15 +24,16 @@ class EditorController extends Controller
             $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;;
 
             //Upload File
-            $request->file('upload')->storeAs('public/uploads', $filenametostore);
+            // $request->file('upload')->storeAs('public/uploads', $filenametostore);
 
             // temp 
-            // $i_m_file = $request->file('upload');
+            $i_m_file = $request->file('upload');
+            Storage::disk('b3')->put('/', $i_m_file);
             // $returned_file_name = Storage::disk('local')->put('/', $i_m_file);
             // $url = $subdomain+'/'+.$filenametostore);
             // temp 
 
-
+            die;
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('storage/uploads/' . $filenametostore);
 

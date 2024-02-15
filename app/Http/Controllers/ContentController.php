@@ -48,6 +48,9 @@ class ContentController extends Controller
         $data = ($remote_image->body());
 
         $imageName = time() . '.png';
-        Storage::disk('local')->put($imageName, $data);
+        $filePath = 'images/' . $imageName;
+        Storage::disk('b3')->put($filePath, $data, 'public');
+
+        Storage::disk('local')->put($filePath, $data);
     }
 }
