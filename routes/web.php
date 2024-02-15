@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
 Route::post('create_post', [ContentController::class, 'create_post'])->name('create_post');
 Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
+Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');

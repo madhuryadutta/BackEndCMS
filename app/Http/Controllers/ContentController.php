@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
@@ -32,5 +34,20 @@ class ContentController extends Controller
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
+    }
+    public function upload()
+    {
+
+        $response = Http::get('https://meme-api.databytedigital.com/');
+        $url = $response['random_meme'];
+
+        $remote_image = Http::get($url, [
+            'Content-Type' => 'image/jpeg',
+        ]);
+
+        $data = ($remote_image->body());
+
+        $imageName = time() . '.png';
+        Storage::disk('local')->put($imageName, $data);
     }
 }
