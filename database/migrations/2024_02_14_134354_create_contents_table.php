@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedinteger('category_id');
             $table->string('title');
-            $table->text('content_text');
+            $table->longText('content_text');
             $table->unsignedinteger('user_id');
             // $table->string("image")->nullable();
             $table->enum('status', ['Published', 'Draft'])->default('Draft');
