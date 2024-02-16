@@ -35,6 +35,7 @@ class ContentController extends Controller
         $content->status = 'Published';
         $content->save();
     }
+
     public function upload()
     {
 
@@ -47,8 +48,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time() . '.png';
-        $filePath = 'images/' . $imageName;
+        $imageName = time().'.png';
+        $filePath = 'images/'.$imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
 class EditorController extends Controller
 {
     public function upload(Request $request)
@@ -21,23 +20,21 @@ class EditorController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;;
+            $filenametostore = str_replace(' ', '', $filename).'_'.time().'.'.$extension;
 
             //Upload File
             // $request->file('upload')->storeAs('public/uploads', $filenametostore);
 
-            // temp 
+            // temp
             $i_m_file = $request->file('upload');
             Storage::disk('b3')->put('/', $i_m_file);
             // $returned_file_name = Storage::disk('local')->put('/', $i_m_file);
             // $url = $subdomain+'/'+.$filenametostore);
-            // temp 
+            // temp
 
-            die;
+            exit;
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('storage/uploads/' . $filenametostore);
-
-
+            $url = asset('storage/uploads/'.$filenametostore);
 
             $msg = 'Image successfully uploaded';
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
