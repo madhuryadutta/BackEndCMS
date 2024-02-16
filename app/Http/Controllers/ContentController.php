@@ -17,7 +17,7 @@ class ContentController extends Controller
         $trackers = DB::select('select * from contents');
 
         // $trackers = $trackers->get();
-        return view('test', ['trackers' => $trackers]);
+        return view('welcome', ['trackers' => $trackers]);
     }
 
     public function create_post(Request $request)
@@ -48,8 +48,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time().'.png';
-        $filePath = 'images/'.$imageName;
+        $imageName = time() . '.png';
+        $filePath = 'images/' . $imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);

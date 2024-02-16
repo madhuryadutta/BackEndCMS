@@ -20,21 +20,21 @@ class EditorController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = str_replace(' ', '', $filename).'_'.time().'.'.$extension;
+            $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
 
+            $path = 'cdn/';
             //Upload File
-            // $request->file('upload')->storeAs('public/uploads', $filenametostore);
+            $request->file('upload')->storeAs($path, $filenametostore);
 
             // temp
-            $i_m_file = $request->file('upload');
-            Storage::disk('b3')->put('/', $i_m_file);
+            // $i_m_file = $request->file('upload');
+            // Storage::disk('b3')->put('/', $i_m_file);
             // $returned_file_name = Storage::disk('local')->put('/', $i_m_file);
             // $url = $subdomain+'/'+.$filenametostore);
             // temp
 
-            exit;
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('storage/uploads/'.$filenametostore);
+            $url = asset($path . $filenametostore);
 
             $msg = 'Image successfully uploaded';
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";

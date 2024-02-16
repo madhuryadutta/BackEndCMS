@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\EditorController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +18,14 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/', function () {
-    Log::emergency('TEST');
 
-    return view('welcome');
+Route::get('/', [ContentController::class, 'view_post'])->name('welcome');
+Route::get('/admin', function () {
+    Log::emergency('Admin Access');
+    return view('contentEdit');
 });
+
+
 Route::get('/get_image', function () {
     // $contents = Storage::disk('b3')->get('aaa.png');
     $contents = Storage::get('aaa.png');
@@ -38,3 +42,10 @@ Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name(
 Route::post('create_post', [ContentController::class, 'create_post'])->name('create_post');
 Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
 Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
+
+
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category', 'viewCategory')->name('viewCategory');
+    Route::post('/edit_category/{id}', 'editCategory')->name('editCategory');
+});
