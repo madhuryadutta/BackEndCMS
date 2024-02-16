@@ -64,10 +64,9 @@ return [
             'region' => env('DBD_DEFAULT_REGION'),
             'bucket' => env('DBD_BUCKET'),
             'endpoint' => env('DBD_ENDPOINT'),
+            'version' => 'latest',
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            "version" => "2006-03-01",
-            // 'throw' => false,
-            'throw' => true,
+            'throw' =>  env('DISPLAY_S3_ERROR', false),
         ],
 
     ],
