@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use App\Models\Category;
 use Faker\factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -24,7 +21,7 @@ class CategorySeeder extends Seeder
             $Category = new Category;
             $Category->parent_id = $i;
             $Category->category_name = Str::random(10);
-            $Category->is_active = 0;
+            $Category->is_active = 1;
             $Category->save();
         }
     }
