@@ -15,7 +15,7 @@
         <div class="container">
             @foreach ($trackers as $tracker)
             {{-- <div class="container">{{$tracker->content_text}}</div> --}}
-            <div class="row">{!!html_entity_decode($tracker->content_text)!!}</div>
+            <div class="row" style="color: black; font-family: sans-serif;" >{!!html_entity_decode($tracker->content_text)!!}</div>
             <hr>
             @endforeach
         </div>
