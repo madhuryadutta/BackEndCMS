@@ -1,4 +1,12 @@
-    <div class="container">
+   
+   @extends('layouts.main')
+   @push('title')
+   <title>Hit-O-Meter</title>
+   
+   @endpush
+   @section('main-section')
+   
+   <div class="container">
       <form enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -34,7 +42,8 @@
     </div>
   </div>
 
-
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
   <script>
     // CKEDITOR.replace( 'editor' );
@@ -46,7 +55,6 @@
       filebrowserUploadMethod: 'form'
     });
   </script>
-
   <script>
     function myFunction() {
       var data = CKEDITOR.instances.editor.getData();
