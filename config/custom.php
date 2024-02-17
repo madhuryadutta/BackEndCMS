@@ -14,6 +14,6 @@ return [
     |
     */
     'cdn' => env('DBD_CDN_ENDPOINT'),
-    'cdnEnable' => env('DBD_CDN_ENABLE',false),
-    
+    'cdnEnable' => env('DBD_CDN_ENABLE', false),
+
 ];

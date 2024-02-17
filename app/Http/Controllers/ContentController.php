@@ -19,16 +19,14 @@ class ContentController extends Controller
     //     // $trackers = $trackers->get();
     //     return view('welcome', ['trackers' => $trackers]);
     // }
-    
-    public function index(){
+
+    public function index()
+    {
         $categoryOption = DB::select('select * from categories');
 
         return view('contentEdit', ['categoryOption' => $categoryOption]);
 
     }
-
-
-
 
     public function create_post(Request $request)
     {
@@ -58,8 +56,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time() . '.png';
-        $filePath = 'images/' . $imageName;
+        $imageName = time().'.png';
+        $filePath = 'images/'.$imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);

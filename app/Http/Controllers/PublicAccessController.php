@@ -16,4 +16,9 @@ class PublicAccessController extends Controller
         // $trackers = $trackers->get();
         return view('welcome', ['trackers' => $trackers]);
     }
+
+    public function future(Request $request)
+    {
+        echo 'future reference';
+    }
 }

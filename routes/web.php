@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\EditorController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublicAccessController;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/', [PublicAccessController::class, 'index'])->name('welcome');
 
@@ -40,8 +38,6 @@ Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name(
 Route::post('create_post', [ContentController::class, 'create_post'])->name('create_post');
 Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
 Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
-
-
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/category', 'viewCategory')->name('viewCategory');

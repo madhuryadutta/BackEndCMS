@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -12,6 +12,7 @@ class CategoryController extends Controller
     {
         $categoryList = DB::select('select * from categories');
         $categoryOption = DB::select('select * from categories');
+
         return view('categoryList', ['categoryList' => $categoryList, 'categoryOption' => $categoryOption]);
     }
 
@@ -26,6 +27,7 @@ class CategoryController extends Controller
         $category->category_name = $request['categoryName'];
         $category->is_active = $request['is_active'];
         $category->save();
+
         return redirect()->route('viewCategory');
     }
     // public function edit($id)

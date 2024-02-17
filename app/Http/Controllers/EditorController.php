@@ -10,7 +10,7 @@ class EditorController extends Controller
     public function upload(Request $request)
     {
         if ($request->hasFile('upload')) {
-            $cdnEndpoint = "https://cdn.databytedigital.com";
+            $cdnEndpoint = config('custom.cdn');
             //get filename with extension
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
