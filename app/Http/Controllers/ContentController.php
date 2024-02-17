@@ -29,7 +29,9 @@ class ContentController extends Controller
 
     public function create_post(Request $request)
     {
-        var_dump($request->all());
+
+        
+        // var_dump($request->all());
         // echo $request['_token'];
         // echo $request['post'];
         $content = new Content;
@@ -40,6 +42,12 @@ class ContentController extends Controller
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
+        $resp_obj = array(
+            'status' => "Success",
+            'code' => 1,
+
+        );
+        echo json_encode($resp_obj);
     }
 
     public function upload()

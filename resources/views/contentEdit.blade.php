@@ -30,6 +30,7 @@
       <button onclick="myFunction()">Click me</button>
     </div>
   </div>
+  
 
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -49,14 +50,22 @@
       var data = CKEDITOR.instances.editor.getData();
       $.ajax({
         type: "POST",
-        url: "{{route('create_post')}}",
+        url: "{{route('createContent')}}",
         data: {
           "_token": "{{ csrf_token() }}",
           "post": data,
         },
         dataType: "json",
         success: function(response) {
+          if(response.code==1){
+            location.reload();
+          }
+          else{
+            console.log();
           console.log(response);
+
+          console.log(response.status);
+          }
         }
       });
       console.log(data);
