@@ -6,31 +6,20 @@
    @endpush
    @section('main-section')
    
-   <div class="container">
+   <div class="container mt-5 ">
       <form enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          <label for="exampleFormControlInput1">Post Name</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Write A suitable Headline for your Content">
         </div>
         <div class="form-group">
           <label for="exampleFormControlSelect1">Example select</label>
           <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Example multiple select</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option>-- Select --</option>
+            @foreach ($categoryOption as $option)
+            <option value={{($option->id)}}>{{($option->category_name)}}</option>
+            @endforeach
           </select>
         </div>
         <div class="form-group">

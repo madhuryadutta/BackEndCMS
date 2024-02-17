@@ -10,15 +10,17 @@ class CategoryController extends Controller
     public function viewCategory()
     {
         $categoryList = DB::select('select * from categories');
+        $categoryOption = DB::select('select * from categories');
 
-        return view('categoryList', ['categoryList' => $categoryList]);
+        return view('categoryList', ['categoryList' => $categoryList, 'categoryOption' => $categoryOption]);
     }
 
-    public function editCategory(Request $request)
+    public function editCategory(Request $request, $id = null)
     {
-        // var_dump($request->all());
-        // // echo $request['_token'];
-        // // echo $request['post'];
+        var_dump($request->all());
+        echo $id;
+        // echo $request['_token'];
+        // echo $request['post'];
         // $content = new Content;
 
         // $content->category_id = 1;

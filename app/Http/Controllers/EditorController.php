@@ -10,6 +10,7 @@ class EditorController extends Controller
     public function upload(Request $request)
     {
         if ($request->hasFile('upload')) {
+            $cdnEndpoint = "https://cdn.databytedigital.com";
             //get filename with extension
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
@@ -35,6 +36,8 @@ class EditorController extends Controller
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset($path . $filenametostore);
+            // $url = url($path . $filenametostore);
+            // $url = $cdnEndpoint.$path . $filenametostore;
 
             $msg = 'Image successfully uploaded';
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
