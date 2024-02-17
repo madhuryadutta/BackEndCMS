@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedinteger('category_id');
+            $table->unsignedinteger('fk_category_id');
             $table->string('title');
             $table->longText('content_text');
             $table->unsignedinteger('user_id');

@@ -25,7 +25,6 @@ class ContentController extends Controller
         $categoryOption = DB::select('select * from categories');
 
         return view('contentEdit', ['categoryOption' => $categoryOption]);
-
     }
 
     public function create_post(Request $request)
@@ -38,7 +37,6 @@ class ContentController extends Controller
         $content->category_id = 1;
         $content->title = $request['_token'];
         $content->content_text = $request['post'];
-        $content->user_id = 1;
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
@@ -56,8 +54,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time().'.png';
-        $filePath = 'images/'.$imageName;
+        $imageName = time() . '.png';
+        $filePath = 'images/' . $imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);
