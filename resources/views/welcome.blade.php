@@ -13,16 +13,21 @@
 <div class="container">
 
   <div class="container">
-    @foreach ($trackers as $tracker)
-    <h2>{{$tracker->title}}</h2>
-    <small>Posted on {{$tracker->created_at}}</small>
-  <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($tracker->content_text)!!}</div>
-    <h6>This Post was last modified on {{$tracker->updated_at}}</h6>
-  <br>
+    @foreach ($contents as $content)
+    <div class="container-fluid">
+    <strong >{{$content->title}}</strong>
+  </div>
+    <small>Posted on {{$content->created_at}}</small>
+    <div class="container">
+      <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($content->content_text)!!}</div>
+    </div>
 
-  <hr>
-  @endforeach
-</div>
+    <h6>This Post was last modified on {{$content->updated_at}}</h6>
+    <br>
+
+    <hr>
+    @endforeach
+  </div>
 
 </div>
 
