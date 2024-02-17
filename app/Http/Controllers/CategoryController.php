@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -11,24 +12,32 @@ class CategoryController extends Controller
     {
         $categoryList = DB::select('select * from categories');
         $categoryOption = DB::select('select * from categories');
-
         return view('categoryList', ['categoryList' => $categoryList, 'categoryOption' => $categoryOption]);
     }
 
     public function editCategory(Request $request, $id = null)
     {
-        var_dump($request->all());
-        echo $id;
-        // echo $request['_token'];
-        // echo $request['post'];
-        // $content = new Content;
-
-        // $content->category_id = 1;
-        // $content->title = $request['_token'];
-        // $content->content_text = $request['post'];
-        // $content->user_id = 1;
-        // $content->user_id = 1;
-        // $content->status = 'Published';
-        // $content->save();
+        if ($id == null) {
+            $category = new Category;
+        } else {
+            $customer = Category::find($id);
+        }
+        $category->parent_id = $request['parentCategory'];
+        $category->category_name = $request['categoryName'];
+        $category->is_active = $request['is_active'];
+        $category->save();
+        return redirect()->route('viewCategory');
     }
+    // public function edit($id)
+    // {
+    //     $customer = Category::find($id);
+    //     $data = compact('customer');
+    //     return view('update_customer')->with($data);
+    // }
+    // public function destroy($id)
+    // {
+    //     //    echo $id;
+    //     $customer = Customer::where('customer_id', $id)->delete();
+    //     return redirect('customer/view');
+    // }
 }

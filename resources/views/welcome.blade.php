@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @push('title')
-<title>Hit-O-Meter</title>
+<title>{{config('app.name')}}</title>
 
 @endpush
 @section('main-section')
@@ -14,9 +14,12 @@
 
   <div class="container">
     @foreach ($trackers as $tracker)
-    {{-- <div class="container">{{$tracker->content_text}}
-  </div> --}}
+    <h2>{{$tracker->title}}</h2>
+    <small>Posted on {{$tracker->created_at}}</small>
   <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($tracker->content_text)!!}</div>
+    <h6>This Post was last modified on {{$tracker->updated_at}}</h6>
+  <br>
+
   <hr>
   @endforeach
 </div>

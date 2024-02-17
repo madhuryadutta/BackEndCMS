@@ -13,7 +13,7 @@
       @csrf
       <div class="form-group">
         <label for="exampleFormControlSelect1">Parent Category</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="exampleFormControlSelect1" name="parentCategory">
           <option value="0">Not applicable</option>
           @foreach ($categoryOption as $option)
           <option value={{($option->id)}}>{{($option->category_name)}}</option>

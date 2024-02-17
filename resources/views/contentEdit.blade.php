@@ -1,7 +1,7 @@
    
    @extends('layouts.main')
    @push('title')
-   <title>Hit-O-Meter</title>
+   <title>Content Editor</title>
    
    @endpush
    @section('main-section')

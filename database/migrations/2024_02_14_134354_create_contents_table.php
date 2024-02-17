@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content_text');
             $table->unsignedinteger('user_id');
-            // $table->string("image")->nullable();
-            $table->enum('status', ['Published', 'Draft'])->default('Draft');
+            $table->enum('status', ['Published', 'Draft', 'Deleted'])->default('Draft');
+            $table->foreign('fk_category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
