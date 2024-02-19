@@ -10,12 +10,12 @@
       <form enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label for="exampleFormControlInput1">Post Name</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Write A suitable Headline for your Content">
+          <label for="post_content">Post Name</label>
+          <input type="email" class="form-control" name="title" id="title" placeholder="Write A suitable Headline for your Content">
         </div>
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label>
-          <select class="form-control" id="exampleFormControlSelect1">
+          <label for="category">Category</label>
+          <select class="form-control" name='category' id="category">
             <option>-- Select --</option>
             @foreach ($categoryOption as $option)
             <option value={{($option->id)}}>{{($option->category_name)}}</option>
@@ -23,7 +23,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="editor">Example textarea</label>
+          <label for="editor">Content</label>
           <textarea class="form-control" id="editor" name="editor"></textarea>
         </div>
       </form>
@@ -33,7 +33,7 @@
   
 
   
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
   <script>
     // CKEDITOR.replace( 'editor' );
@@ -53,7 +53,9 @@
         url: "{{route('createContent')}}",
         data: {
           "_token": "{{ csrf_token() }}",
-          "post": data,
+          "post_content": data,
+          "title": document.getElementById("title").value,
+          "category": document.getElementById("category").value,
         },
         dataType: "json",
         success: function(response) {

@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedinteger('fk_category_id');
+            $table->unsignedBigInteger('fk_category_id');
+            $table->foreign('fk_category_id')->references('id')->on('categories');
             $table->string('title');
             $table->longText('content_text');
             $table->unsignedinteger('user_id');
             $table->enum('status', ['Published', 'Draft', 'Deleted'])->default('Draft');
-            $table->foreign('fk_category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

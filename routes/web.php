@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
+Route::get('/install', [SettingController::class, 'install'])->name('install');
 Route::get('/', [PublicAccessController::class, 'index'])->name('welcome');
 
 Route::get('/get_image', function () {

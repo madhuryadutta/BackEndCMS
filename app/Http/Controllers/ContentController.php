@@ -30,15 +30,10 @@ class ContentController extends Controller
     public function create_post(Request $request)
     {
 
-        
-        // var_dump($request->all());
-        // echo $request['_token'];
-        // echo $request['post'];
         $content = new Content;
-
-        $content->category_id = 1;
-        $content->title = $request['_token'];
-        $content->content_text = $request['post'];
+        $content->fk_category_id =$request['category'];
+        $content->title = $request['title'];
+        $content->content_text = $request['post_content'];
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
