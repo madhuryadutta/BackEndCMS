@@ -31,17 +31,17 @@ class ContentController extends Controller
     {
 
         $content = new Content;
-        $content->fk_category_id =$request['category'];
+        $content->fk_category_id = $request['category'];
         $content->title = $request['title'];
         $content->content_text = $request['post_content'];
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
-        $resp_obj = array(
-            'status' => "Success",
+        $resp_obj = [
+            'status' => 'Success',
             'code' => 1,
 
-        );
+        ];
         echo json_encode($resp_obj);
     }
 
@@ -57,8 +57,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time() . '.png';
-        $filePath = 'images/' . $imageName;
+        $imageName = time().'.png';
+        $filePath = 'images/'.$imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);
