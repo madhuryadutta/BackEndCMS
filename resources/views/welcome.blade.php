@@ -14,13 +14,32 @@
 
   <div class="container">
     @foreach ($contents as $content)
+    {{-- method 2  --}}
+    {{-- @php
+        $final= $content->title .$content->content_text;
+    @endphp --}}
+    {{-- method 2  --}}
     <div class="container-fluid">
-    <strong >{{$content->title}}</strong>
+    {{-- <strong >{{$content->title}}</strong> --}}
+    {{-- <h2 >{{$content->title}}</h2> --}}
   </div>
     <small>Posted on {{$content->created_at}}</small>
     <div class="container">
-      <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($content->content_text)!!}</div>
+      {{-- <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($final)!!}</div> --}}
+      <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode('<h1 style="color: tomato;font-style: oblique;font-family: cursive;">' . $content->title.'</h1><br><br>' .$content->content_text)!!}</div>
     </div>
+
+
+
+
+
+
+  
+
+
+
+
+
 
     <h6>This Post was last modified on {{$content->updated_at}}</h6>
     <br>

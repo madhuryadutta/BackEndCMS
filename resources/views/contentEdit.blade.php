@@ -34,7 +34,7 @@
 
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
   <script>
     // CKEDITOR.replace( 'editor' );
   </script>
