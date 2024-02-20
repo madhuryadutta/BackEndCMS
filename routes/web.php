@@ -1,12 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ContentController;
-use App\Http\Controllers\EditorController;
-use App\Http\Controllers\PublicAccessController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,37 +9,23 @@ use Illuminate\Support\Facades\Storage;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::get('/install', [SettingController::class, 'install'])->name('install');
-Route::get('/', [PublicAccessController::class, 'index'])->name('welcome');
-
-Route::get('/get_image', function () {
-    // $contents = Storage::disk('b3')->get('aaa.png');
-    $contents = Storage::get('aaa.png');
-    header('Content-type: image/png');
-    echo $contents;
-});
-Route::get('/101', function () {
-    $files = Storage::files('/');
-
-    return $files;
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
-Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
-Route::post('create_content', [ContentController::class, 'create_post'])->name('createContent');
-Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
-Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/category', 'viewCategory')->name('viewCategory');
-    Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::controller(SettingController::class)->group(function () {
-    Route::get('/admin', 'viewDashboard')->name('adminArea');
-    // Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
-});
+
+require __DIR__.'/auth.php';
