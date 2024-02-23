@@ -2,16 +2,19 @@
    @extends('layouts.main')
    @push('title')
    <title>Content Editor</title>
-   
    @endpush
    @section('main-section')
    
    <div class="container mt-5 ">
       <form enctype="multipart/form-data">
+
         @csrf
+
+
+{{ json_decode($single_content)}};
         <div class="form-group">
           <label for="post_content">Post Name</label>
-          <input type="email" class="form-control" name="title" id="title" placeholder="Write A suitable Headline for your Content">
+          <input type="email" class="form-control" name="title" id="title" value="456" placeholder="Write A suitable Headline for your Content">
         </div>
         <div class="form-group">
           <label for="category">Category</label>
@@ -73,3 +76,4 @@
       console.log(data);
     }
   </script>
+@endsection

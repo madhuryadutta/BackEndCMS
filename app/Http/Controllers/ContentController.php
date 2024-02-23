@@ -10,15 +10,34 @@ use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
-    // public function view_post()
-    // {
-    //     // $trackers = DB::table('page_view_count_link_creations')->where('user_id', $current_user_id);
-    //     // $trackers = DB::select('select * from contents where user_id=? and soft_del=? order by created_at desc', [$current_user_id, 0]);
-    //     $trackers = DB::select('select * from contents');
 
-    //     // $trackers = $trackers->get();
-    //     return view('welcome', ['trackers' => $trackers]);
-    // }
+
+
+
+    // ------------------------- Under development
+
+    public function singleContent($id)
+    {
+        $current_user_id = 9999;
+        $single_content = DB::select('select id, title, user_id, status, updated_at from contents where id=? and user_id=? and (status=? or status=?) order by updated_at desc', [$id, $current_user_id, 'Draft', 'Published']);
+        $categoryOption = DB::select('select * from categories');
+        // return view('contentEdit', ['single_content' => $single_content, 'categoryOption' => $categoryOption]);
+    }
+
+    // ------------------------- Under development
+
+
+    public function listContent()
+    {
+        $current_user_id = 9999;
+        $contents = DB::select('select id, title, user_id, status, updated_at from contents where user_id=? and (status=? or status=?) order by updated_at desc ', [$current_user_id, 'Draft', 'Published']);
+        // $trackers = $trackers->get();
+        return view('listContent', ['contents' => $contents]);
+    }
+
+
+
+
 
     public function index()
     {
@@ -57,10 +76,21 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time().'.png';
-        $filePath = 'images/'.$imageName;
+        $imageName = time() . '.png';
+        $filePath = 'images/' . $imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);
     }
+
+
+    // public function view_post()
+    // {
+    //     // $trackers = DB::table('page_view_count_link_creations')->where('user_id', $current_user_id);
+    //     // $trackers = DB::select('select * from contents where user_id=? and soft_del=? order by created_at desc', [$current_user_id, 0]);
+    //     $trackers = DB::select('select * from contents');
+
+    //     // $trackers = $trackers->get();
+    //     return view('welcome', ['trackers' => $trackers]);
+    // }
 }

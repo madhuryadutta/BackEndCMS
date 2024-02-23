@@ -4,30 +4,45 @@
 
 @endpush
 @section('main-section')
-<div class="bg-body-tertiary p-5 rounded">
-  <h1>Navbar example</h1>
-  <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll,
-    this navbar remains in its original position and moves with the rest of the page.</p>
-  <a class="btn btn-lg btn-primary" href="../components/navbar/" role="button">View navbar docs &raquo;</a>
-  <a class="btn btn-lg btn-primary" href="../components/navbar/" role="button">View navbar docs &raquo;</a>
-</div>
-<div class="container">
+<br>
+<br>
+<br>
+<br>
 
-  <div class="container">
-    {{-- @foreach ($contents as $content)
-    <div class="container-fluid">
-    <strong >{{$content->title}}</strong>
-  </div>
-    <small>Posted on {{$content->created_at}}</small>
-    <div class="container">
-      <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($content->content_text)!!}</div>
+
+  <div class="container text-center ">
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img src="https://databytedigital.com/image/logo.png" class="card-img-top" alt="https://databytedigital.com/image/logo.png">
+          <div class="card-body">
+            <h5 class="card-title">Categories</h5>
+            <p class="card-text">Manage all category related task from here.</p>
+            <a href="{{route('viewCategory')}}" class="btn btn-primary">Open</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img src="https://databytedigital.com/image/logo.png" class="card-img-top" alt="https://databytedigital.com/image/logo.png">
+          <div class="card-body">
+            <h5 class="card-title">Post</h5>
+            <p class="card-text">Manage all Content related task from here..</p>
+            <a href="{{route('listContent')}}" class="btn btn-primary">Open</a>
+          </div>
+        </div>
+      </div>
+      {{-- <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img src="https://databytedigital.com/image/logo.png" class="card-img-top" alt="https://databytedigital.com/image/logo.png">
+          <div class="card-body">
+            <h5 class="card-title">Other</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Open</a>
+          </div>
+        </div>
+      </div> --}}
     </div>
-
-    <h6>This Post was last modified on {{$content->updated_at}}</h6>
-    <br>
-
-    <hr>
-    @endforeach --}}
   </div>
 
 </div>

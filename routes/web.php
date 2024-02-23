@@ -37,7 +37,9 @@ Route::get('/101', function () {
 Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
 Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
 Route::post('create_content', [ContentController::class, 'create_post'])->name('createContent');
-Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
+// Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
+Route::get('single_content/{id}', [ContentController::class, 'singleContent'])->name('singleContent');
+Route::get('list_content', [ContentController::class, 'listContent'])->name('listContent');
 Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
 
 Route::controller(CategoryController::class)->group(function () {

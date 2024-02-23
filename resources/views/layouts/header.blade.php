@@ -168,7 +168,7 @@
             <a class="nav-link" href="{{route('viewCategory')}}">Category</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('adminArea')}}">Secure Zone</a>
+            <a class="nav-link" href="{{route('adminArea')}}">Admin Dashboard</a>
           </li>
           
           <li class="nav-item">
