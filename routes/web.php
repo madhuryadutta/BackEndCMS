@@ -44,6 +44,7 @@ Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/category', 'viewCategory')->name('viewCategory');
+    Route::get('/add_category', 'addCategory')->name('addCategory');
     Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
 });
 Route::controller(SettingController::class)->group(function () {

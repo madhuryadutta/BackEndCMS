@@ -11,10 +11,10 @@
         @csrf
 
 
-{{ json_decode($single_content)}};
+{{-- {{ json_decode($single_content)}}; --}}
         <div class="form-group">
           <label for="post_content">Post Name</label>
-          <input type="email" class="form-control" name="title" id="title" value="456" placeholder="Write A suitable Headline for your Content">
+          <input type="email" class="form-control" name="title" id="title" placeholder="Write A suitable Headline for your Content">
         </div>
         <div class="form-group">
           <label for="category">Category</label>
