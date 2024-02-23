@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
-
-
-
-
     // ------------------------- Under development
 
     public function singleContent($id)
@@ -26,18 +22,14 @@ class ContentController extends Controller
 
     // ------------------------- Under development
 
-
     public function listContent()
     {
         $current_user_id = 9999;
         $contents = DB::select('select id, title, user_id, status, updated_at from contents where user_id=? and (status=? or status=?) order by updated_at desc ', [$current_user_id, 'Draft', 'Published']);
+
         // $trackers = $trackers->get();
         return view('listContent', ['contents' => $contents]);
     }
-
-
-
-
 
     public function index()
     {
@@ -76,13 +68,12 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time() . '.png';
-        $filePath = 'images/' . $imageName;
+        $imageName = time().'.png';
+        $filePath = 'images/'.$imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);
     }
-
 
     // public function view_post()
     // {
