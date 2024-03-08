@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\VarDumper\VarDumper;
 
 class EditorController extends Controller
 {
     public function upload(Request $request)
     {
+        var_dump($request);
+        die();
         if ($request->hasFile('upload')) {
             $cdnEndpoint = config('custom.cdn');
             //get filename with extension
@@ -21,7 +24,7 @@ class EditorController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = str_replace(' ', '', $filename).'_'.time().'.'.$extension;
+            $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
 
             $path = 'cdn/';
             //Upload File
@@ -35,7 +38,7 @@ class EditorController extends Controller
             // temp
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset($path.$filenametostore);
+            $url = asset($path . $filenametostore);
             // $url = url($path . $filenametostore);
             // $url = $cdnEndpoint.$path . $filenametostore;
 

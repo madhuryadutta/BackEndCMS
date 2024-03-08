@@ -20,7 +20,7 @@ class SettingController extends Controller
                 'id' => 9999, 'title' => 'This is Demo Post of BackEndCMS', 'content_text' => '<p>Thank you For UsIng&nbsp;BackEndCMS</p>', 'user_id' => 9999, 'fk_category_id' => 9999, 'created_at' => '2001-02-19 19:53:06', 'updated_at' => '2001-02-19 19:53:06',
             ]);
         } catch (\Throwable $e) {
-            Log::debug('There was an SQL error which was handle by a exception handling in SettingsController: '.$e->getMessage());
+            Log::debug('There was an SQL error which was handle by a exception handling in SettingsController: ' . $e->getMessage());
         } finally {
             return redirect('/');
         }

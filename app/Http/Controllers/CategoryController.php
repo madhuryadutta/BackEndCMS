@@ -11,7 +11,6 @@ class CategoryController extends Controller
     public function viewCategory()
     {
         $categoryList = DB::select('select * from categories');
-
         return view('categoryList', ['categoryList' => $categoryList]);
     }
 
