@@ -11,6 +11,9 @@ class EditorController extends Controller
 {
     public function upload(Request $request)
     {
+        $cdnEndpoint = config('custom.cdn');
+
+
         // var_dump($request);
 
         $this->validate($request, [
@@ -22,40 +25,57 @@ class EditorController extends Controller
 
         // Resize the image
         $resizedImage = Image::make($image->path());
-        $resizedImage->resize(300, null, function ($constraint) {
+        $resizedImage->resize(720, 1280, function ($constraint) {
             $constraint->aspectRatio();
         });
 
         // Using Laravel's storage system to save the image
-        $path = 'images/' . $filename; // Define path within the disk
+        $path = 'cdn/' . $filename; // Define path within the disk
 
         // Choose disk: local, public, or s3
-        $disk = 'public'; // Example: to use the "public" disk
+        // $disk = 'public'; // Example: to use the "public" disk
+        $disk = 'local'; // Example: to use the "public" disk
 
         // Save the image to disk
         Storage::disk($disk)->put($path, (string) $resizedImage->encode());
 
+
+
+        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+        $url = $cdnEndpoint.$path;
+        // echo $url;
+        // $url = asset($path . $filenametostore);
+        // $url = url($path . $filenametostore);
+        // $url = $cdnEndpoint.$path . $filenametostore;
+
+        $msg = 'Image successfully uploaded';
+        $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+        // Render HTML output
+        @header('Content-type: text/html; charset=utf-8');
+        echo $re;
         // Return success response
-        return back()->with('success', 'Image uploaded successfully')->with('imageName', $filename);
-        die();
+        // return back()->with('success', 'Image uploaded successfully')->with('imageName', $filename);
+        // die();
 
         // if ($request->hasFile('upload')) {
-        $cdnEndpoint = config('custom.cdn');
+
         //get filename with extension
-        $filenamewithextension = $request->file('upload')->getClientOriginalName();
+        // $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
         //get filename without extension
-        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        // $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
 
         //get file extension
-        $extension = $request->file('upload')->getClientOriginalExtension();
+        // $extension = $request->file('upload')->getClientOriginalExtension();
 
         //filename to store
-        $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
+        // $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
+        // $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
 
         $path = 'cdn/';
         //Upload File
-        $request->file('upload')->storeAs($path, $filenametostore);
+        // $request->file('upload')->storeAs($path, $filenametostore);
 
 
 
@@ -66,17 +86,7 @@ class EditorController extends Controller
         // $url = $subdomain+'/'+.$filenametostore);
         // temp
 
-        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        $url = asset($path . $filenametostore);
-        // $url = url($path . $filenametostore);
-        // $url = $cdnEndpoint.$path . $filenametostore;
 
-        $msg = 'Image successfully uploaded';
-        $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
-        // Render HTML output
-        @header('Content-type: text/html; charset=utf-8');
-        echo $re;
     }
 }
 // }

@@ -13,7 +13,7 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-    'cdn' => env('DBD_CDN_ENDPOINT'),
+    'cdn' => env('DBD_CDN_ENDPOINT','/'),
     'cdnEnable' => env('DBD_CDN_ENABLE', false),
 
 ];

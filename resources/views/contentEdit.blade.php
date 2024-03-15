@@ -37,15 +37,15 @@
 
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-  <script>
-    // CKEDITOR.replace( 'editor' );
-  </script>
+  {{-- <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script> --}}
+  <script src="/ckeditor/ckeditor.js"></script>
+  <script src="/ckeditor/config.js"></script>
 
   <script>
     CKEDITOR.replace('editor', {
+      disableObjectResizing: true,
       filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-      filebrowserUploadMethod: 'form'
+      filebrowserUploadMethod: 'form',
     });
   </script>
   <script>
