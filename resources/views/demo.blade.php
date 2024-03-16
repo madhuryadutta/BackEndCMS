@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>API Response Display</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
   /* Global styles */
   body {
@@ -12,12 +13,33 @@
     padding: 0;
     background-color: #f8f9fa;
   }
-  
+
+  /* Navigation styles */
+  nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  /* Footer styles */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
   /* Container for posts */
   #apiResponse {
-    max-width: 800px;
+    max-width: 1200px; /* Adjust max-width as needed incase of any issue chnage it to 1000px or 800px */
     margin: 0 auto;
     padding: 20px;
+    padding-top: 70px; /* Adjust for space occupied by nav */
+    padding-bottom: 70px; /* Adjust for space occupied by footer */
   }
 
   /* Styles for individual post */
@@ -60,16 +82,43 @@
     height: auto !important;
   }
 
-  /* Media query for responsiveness */
-  @media screen and (max-width: 600px) {
-    .post {
-      padding: 10px;
-    }
+  /* Clearfix for floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
   }
 </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div id="apiResponse"></div>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span class="text-muted">&copy; 2024 Your Company Name</span>
+  </div>
+</footer>
 
 <script>
 // Function to fetch data from the API endpoint using POST method
@@ -129,5 +178,9 @@ function displayPosts(data) {
 // Call the function to fetch data when the page loads
 document.addEventListener('DOMContentLoaded', fetchData);
 </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
