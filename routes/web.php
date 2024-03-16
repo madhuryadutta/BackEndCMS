@@ -8,6 +8,8 @@ use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +53,7 @@ Route::controller(SettingController::class)->group(function () {
     Route::get('/admin', 'viewDashboard')->name('adminArea');
     // Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
 });
+
+
+
+

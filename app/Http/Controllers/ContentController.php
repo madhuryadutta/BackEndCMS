@@ -41,10 +41,12 @@ class ContentController extends Controller
     public function create_post(Request $request)
     {
 
+        # temporary fix to image height width issue
+        $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
         $content = new Content;
         $content->fk_category_id = $request['category'];
         $content->title = $request['title'];
-        $content->content_text = $request['post_content'];
+        $content->content_text = $updated_content_text;
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
@@ -68,8 +70,8 @@ class ContentController extends Controller
 
         $data = ($remote_image->body());
 
-        $imageName = time().'.png';
-        $filePath = 'images/'.$imageName;
+        $imageName = time() . '.png';
+        $filePath = 'images/' . $imageName;
         Storage::disk('b3')->put($filePath, $data, 'public');
 
         Storage::disk('local')->put($filePath, $data);
