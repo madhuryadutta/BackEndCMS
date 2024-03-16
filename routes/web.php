@@ -55,5 +55,6 @@ Route::controller(SettingController::class)->group(function () {
 });
 
 
-
-
+Route::get('/demo', function () {
+    return view('demo');
+});
