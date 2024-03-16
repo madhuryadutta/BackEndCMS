@@ -28,6 +28,9 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Lazy loading */
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
   }
 
   /* Title style */
@@ -53,11 +56,8 @@
 
   /* Responsive image style */
   .post img {
-    max-width: 100%;
-    height: auto;
-    /* Lazy loading */
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+    max-width: 100% !important;
+    height: auto !important;
   }
 
   /* Media query for responsiveness */
@@ -109,26 +109,20 @@ function displayPosts(data) {
       <div class="content">${post.content_text}</div>
     `;
     responseDiv.appendChild(postDiv);
+  });
 
-    // Lazy loading for images
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const lazyImage = entry.target;
-          lazyImage.src = lazyImage.dataset.src;
-          lazyImage.onload = () => {
-            lazyImage.style.opacity = 1;
-          };
-          observer.unobserve(lazyImage);
-        }
-      });
+  // Lazy loading for all posts
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        observer.unobserve(entry.target);
+      }
     });
+  });
 
-    postDiv.querySelectorAll('img').forEach(img => {
-      img.setAttribute('data-src', img.src); // Set data-src to actual src
-      img.src = ''; // Clear src to prevent immediate loading
-      observer.observe(img);
-    });
+  document.querySelectorAll('.post').forEach(post => {
+    observer.observe(post);
   });
 }
 
