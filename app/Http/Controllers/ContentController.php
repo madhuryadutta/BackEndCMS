@@ -41,6 +41,15 @@ class ContentController extends Controller
     public function create_post(Request $request)
     {
         $post = $request['post_content'];
+        $post = "The worst home improvement decision I made in 40+yrs. of home ownership was my choice of Retro Foam.
+
+        Now I own a house that has not passed inspection due to their 'work'.
+        
+        I'd like to say 'thank you' to Brandon and Joey at the franchise in Pittsburgh for rutting up my lawn, crushing my driveway pipe, destroying my joist support beams, leaving the jobsite filthy, spraying foam on my foundation shrubs, plants and hardscape, for not cleaning up the uncured foam that still reeks like a dead animal 6mos. later, and finally for spraying foam all over the HVAC system after I told them not to. But, most of all, I give a big 'thank you' to Eric Garcia, expert in Dickensian circumlocution (the art of the runaround), diversion, delay and gaslighting, who made it all a reality I will have to live with the rest of my life.
+        
+        Choose your contractor wisely, watch the movie 'Tin Men'.
+        
+        Don't make the mistake I made.";
         // Execute the Python script
         $command = escapeshellcmd("python ./keyword_extraction.py " . escapeshellarg($post));
         $output = shell_exec($command);

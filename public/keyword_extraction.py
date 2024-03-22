@@ -15,6 +15,9 @@ nltk.download('stopwords')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
 nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
 
 def extract_keywords(text, num_keywords=50):
     # Tokenize the text
@@ -66,6 +69,14 @@ def get_wordnet_pos(treebank_tag):
     else:
         return 'n'  # Default to noun
 
+def extract_entities(text):
+    entities = []
+    for sent in nltk.sent_tokenize(text):
+        for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(sent))):
+            if hasattr(chunk, 'label'):
+                entities.append(' '.join(c[0] for c in chunk))
+    return entities
+
 try:
     # Input text from command line argument
     text = sys.argv[1]
@@ -73,8 +84,14 @@ try:
     # Extract keywords
     keywords = extract_keywords(text)
 
-    # Output the keywords as a comma-separated string
-    print(','.join(keywords))
+    # Extract named entities
+    entities = extract_entities(text)
+
+    # Combine keywords and entities for tags
+    tags = set(keywords + entities)
+
+    # Output the tags as a comma-separated string
+    print(','.join(tags))
 except IndexError:
     print("Error: No input text provided")
     sys.exit(1)
