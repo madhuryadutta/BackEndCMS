@@ -1,4 +1,10 @@
 <?php
+ini_set('post_max_size', '16M'); // Adjust to a higher value if needed
+ini_set('max_input_time', 300);  // Adjust to a higher value if needed (in seconds)
+ini_set('memory_limit', '256M'); // Adjust to a higher value if needed
+
+
+
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
@@ -60,7 +66,6 @@ Route::get('/demo', function () {
 });
 
 Route::get('/nltk', function () {
-    set_time_limit(60);
     $post = "The worst home improvement decision I made in 40+yrs. of home ownership was my choice of Retro Foam.
 
 Now I own a house that has not passed inspection due to their 'work'.
@@ -74,5 +79,11 @@ Don't make the mistake I made.";
     // Execute the Python script
     $command = escapeshellcmd("python ./keyword_extraction.py " . escapeshellarg($post));
     $output = shell_exec($command);
-    echo $output;
+
+    if ($output === null) {
+        echo "Error executing Python script.";
+    } else {
+        echo "Python Output: " . $output;
+    }
+    // echo $output;
 });
