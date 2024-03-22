@@ -1,0 +1,3 @@
+pip install nltk
+
+python -m nltk.downloader averaged_perceptron_tagger stopwords punkt maxent_ne_chunker words

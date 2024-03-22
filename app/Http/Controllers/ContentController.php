@@ -41,12 +41,16 @@ class ContentController extends Controller
     public function create_post(Request $request)
     {
         $post = $request['post_content'];
-        $topKeywords = $this->extractKeywords($post, 10);
-        $tags = '';
-        foreach ($topKeywords as $topKeyword) {
-            $tags = $tags . $topKeyword . ' , ';
-        }
-        echo $tags;
+        // Execute the Python script
+        $command = escapeshellcmd("python ./keyword_extraction.py " . escapeshellarg($post));
+        $output = shell_exec($command);
+
+        // Convert the output string to an array
+        $data['keywords'] = explode("\n", trim($output));
+        // $keywords = explode("\n", trim($output));
+        // echo implode(", ", $keywords);
+        // return view('keyword_view', $data);
+        return $data;
         die();
         # temporary fix to image height width issue
         $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
