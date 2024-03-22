@@ -19,7 +19,7 @@ nltk.download('averaged_perceptron_tagger')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
 
-def extract_keywords(text, num_keywords=50):
+def extract_keywords(text, num_keywords=25):
     # Tokenize the text
     words = word_tokenize(text.lower())  # Convert to lowercase for consistency
 
