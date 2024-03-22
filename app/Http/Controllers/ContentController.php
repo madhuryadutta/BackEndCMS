@@ -40,7 +40,14 @@ class ContentController extends Controller
 
     public function create_post(Request $request)
     {
-
+        $post = $request['post_content'];
+        $topKeywords = $this->extractKeywords($post, 10);
+        $tags = '';
+        foreach ($topKeywords as $topKeyword) {
+            $tags = $tags . $topKeyword . ' , ';
+        }
+        echo $tags;
+        die();
         # temporary fix to image height width issue
         $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
         $content = new Content;

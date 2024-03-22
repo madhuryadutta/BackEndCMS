@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('fk_category_id')->references('id')->on('categories');
             $table->string('title');
             $table->longText('content_text');
+            $table->string('content_tags')->nullable();
             $table->unsignedinteger('user_id');
             $table->enum('status', ['Published', 'Draft', 'Deleted'])->default('Draft');
             $table->timestamps();
