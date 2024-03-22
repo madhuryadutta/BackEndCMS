@@ -53,7 +53,7 @@ class ContentController extends Controller
         // Execute the Python script
         $command = escapeshellcmd("python ./keyword_extraction.py " . escapeshellarg($post));
         $output = shell_exec($command);
-
+        echo $output;
         // Convert the output string to an array
         $data['keywords'] = explode("\n", trim($output));
         // $keywords = explode("\n", trim($output));
