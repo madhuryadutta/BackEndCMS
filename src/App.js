@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PostList from './components/PostList';
 import PostDetails from './components/PostDetails'; // Create this component
 // import ThemeToggle from './components/ThemeToggle';
+import Navbar from './components/Navbar';
 import 'tailwindcss/tailwind.css';
 
 function App() {
 	return (
 		<Router>
 			<div className="dark:bg-gray-900 dark:text-white min-h-screen">
+				<Navbar />
 				<Routes>
 					<Route path="/" element={<PostList />} />
 					<Route path="/post/:postId" element={<PostDetails />} />
