@@ -1,6 +1,6 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import StaticPage from './StaticPage';
+import React from "react";
+import { useParams } from "react-router-dom";
+import StaticPage from "./StaticPage";
 
 const RenderPage = () => {
     const { pageName } = useParams();
