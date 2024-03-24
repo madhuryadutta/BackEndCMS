@@ -8,11 +8,18 @@ const ThemeToggle = () => {
     return savedMode === 'dark';
   });
 
+
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-    updateUserSettings({ theme: darkMode ? 'dark' : 'light' });
+    if (darkMode !== localStorage.getItem('theme')) {
+      updateUserSettings({ theme: darkMode ? 'dark' : 'light' });
+    }
   }, [darkMode]);
+
+
+
 
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
@@ -20,7 +27,8 @@ const ThemeToggle = () => {
 
   const updateUserSettings = async (data) => {
     try {
-      await axios.put(`${config.apiUrl}/user/settings`, data);
+      // await axios.put(`${config.apiUrl}/user/settings`, data);
+      await axios.put(`${config.apiUrl}/test`, data);
       console.log('User settings updated successfully');
     } catch (error) {
       console.error('Failed to update user settings:', error);
