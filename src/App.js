@@ -1,15 +1,21 @@
-import React from "react";
-import "./App.css";
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PostList from './components/PostList';
+import PostDetails from './components/PostDetails'; // Create this component
+// import ThemeToggle from './components/ThemeToggle';
+function App() {
+	return (
+		<Router>
+			<div className="dark:bg-gray-900 dark:text-white min-h-screen">
+				<Routes>
+					<Route path="/" element={<PostList />} />
+					<Route path="/post/:postId" element={<PostDetails />} />
 
-import Posts from "./components/Posts";
-const App = () => {
-return (
-	<div className="main-container">
-	<h1 className="main-heading">
-		Blog App using React Js
-	</h1>
-	<Posts />
-	</div>
-);
-};
+				</Routes>
+			</div>
+		</Router>
+	);
+}
+
 export default App;
