@@ -1,5 +1,6 @@
-// src/components/ThemeToggle.js
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../utils/config';
 
 const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -10,10 +11,20 @@ const ThemeToggle = () => {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    updateUserSettings({ theme: darkMode ? 'dark' : 'light' });
   }, [darkMode]);
 
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
+  };
+
+  const updateUserSettings = async (data) => {
+    try {
+      await axios.put(`${config.apiUrl}/user/settings`, data);
+      console.log('User settings updated successfully');
+    } catch (error) {
+      console.error('Failed to update user settings:', error);
+    }
   };
 
   return (
