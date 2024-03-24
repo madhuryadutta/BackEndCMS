@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PostList from './components/PostList';
 import PostDetails from './components/PostDetails'; // Create this component
 // import ThemeToggle from './components/ThemeToggle';
+import 'tailwindcss/tailwind.css';
+
 function App() {
 	return (
 		<Router>
