@@ -1,0 +1,4 @@
+pip install nltk
+pip install numpy
+python -m nltk.downloader averaged_perceptron_tagger stopwords punkt maxent_ne_chunker words
+pip install scikit-learn

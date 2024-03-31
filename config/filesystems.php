@@ -56,6 +56,18 @@ return [
             'throw' => false,
         ],
 
+        'b3' => [
+            'driver' => 's3',
+            'key' => env('DBD_ACCESS_KEY_ID'),
+            'secret' => env('DBD_SECRET_ACCESS_KEY'),
+            'region' => env('DBD_DEFAULT_REGION'),
+            'bucket' => env('DBD_BUCKET'),
+            'endpoint' => env('DBD_ENDPOINT'),
+            'version' => 'latest',
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => env('DISPLAY_S3_ERROR', false),
+        ],
+
     ],
 
     /*
@@ -71,6 +83,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('cdn') => storage_path('app/cdn'),
     ],
 
 ];
