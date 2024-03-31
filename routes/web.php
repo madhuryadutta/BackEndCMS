@@ -48,6 +48,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/category', 'viewCategory')->name('viewCategory');
     Route::get('/add_category', 'addCategory')->name('addCategory');
     Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
+    Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
 });
 Route::controller(SettingController::class)->group(function () {
     Route::get('/admin', 'viewDashboard')->name('adminArea');
