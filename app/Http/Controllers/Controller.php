@@ -71,4 +71,25 @@ class Controller extends BaseController
 
         return $topKeywords;
     }
+    public function keygen($post)
+    {
+        $post = strip_tags($post);
+        // Decode HTML entities
+        $post = htmlspecialchars_decode($post, ENT_QUOTES);
+
+        // Remove special characters and quotes
+        $post = preg_replace('/[^\w\s]/', '', $post);
+
+        $post = preg_replace('/\s+/', ' ', $post);
+        $post = trim($post);
+
+        // Execute the Python script
+        $command = escapeshellcmd("python ./keyword_extraction.py " . escapeshellarg($post));
+        $output = shell_exec($command);
+
+        // Convert the output string to an array
+        $data['keywords'] = explode("\n", trim($output));
+        return  $data['keywords'];
+        die;
+    }
 }
