@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function viewCategory()
     {
-        $categoryList = DB::select('select * from categories');
+        $categoryList = DB::select('select * from categories where is_active=1 ');
         return view('categoryList', ['categoryList' => $categoryList]);
     }
 
@@ -42,10 +42,24 @@ class CategoryController extends Controller
     //     $data = compact('customer');
     //     return view('update_customer')->with($data);
     // }
+
+    public function deleteCategory($id)
+    {
+        $category = Category::find($id);
+        $category->is_active =0;
+        $category->save();
+        return redirect()->route('viewCategory');
+    }
+
+
+
+
+
     // public function destroy($id)
     // {
-    //     //    echo $id;
-    //     $customer = Customer::where('customer_id', $id)->delete();
+    //     echo $id;
+    //     die();
+    //     // $customer = Customer::where('customer_id', $id)->delete();
     //     return redirect('customer/view');
     // }
 }

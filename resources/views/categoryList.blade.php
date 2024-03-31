@@ -49,8 +49,8 @@
           </td>
           <td>{{($category->created_at)}}</td>
           <td>{{($category->id)}}</td>
-          <td><a href="{{route('singleContent',['id'=>$category->id])}}"><button>Edit</button></a>
-          <td>
+          <td><a href="{{route('editCategory',['id'=>$category->id])}}"><button>Edit</button></a>
+          <td><a href="{{route('deleteCategory',['id'=>$category->id])}}">
             <button>Delete</button>
           </td>
           </td>
@@ -63,4 +63,5 @@
     </table>
   </div>
 </div>
+
 @endsection

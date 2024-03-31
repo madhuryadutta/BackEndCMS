@@ -1,11 +1,11 @@
-## About BackEndCMS
+# BackEndCMS
 
 BackEndCMS will be a Starter Template for Conetnt Management related web applications based on Laravel framework. I believe developing a Web Application from scratch is time consuming and not must be an enjoyable experience . So Lets work on Minimizng the efforts .
 
 ### Project Started on 30/11/2023 
 
 
-## comands to be run on Producton ENvironment
+## commands to be run on Producton Environment
 
 ```shell 
 composer install --optimize-autoloader --no-dev 
@@ -16,9 +16,7 @@ php artisan view:cache
 ```
 
 
-# Laravel BackEndCMS
-
-## Overview
+## Project Overview
 Laravel BackEndCMS is a comprehensive content management system (CMS) built on the Laravel framework. It provides a robust backend solution for managing website content efficiently. With its rich feature set and Laravel's powerful capabilities, it offers an intuitive and flexible platform for content creation, organization, and administration.
 
 ## Current Features
@@ -60,4 +58,3 @@ Laravel BackEndCMS is developed and maintained by [Madhurya Dutta](https://githu
 
 ## Acknowledgements
 Special thanks to all those who have contributed or will contribute to this project..
-
