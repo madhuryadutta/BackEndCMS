@@ -54,7 +54,7 @@
          type: "POST",
          //  url: "{{route('createContent')}}",
          // in some situation we get mix content error while using route method  
-         url: "/createContent",
+         url: "/create_content",
          data: {
            "_token": "{{ csrf_token() }}",
            "post_content": data,
