@@ -5,12 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+
 
 class CategoryController extends Controller
 {
     public function viewCategory()
     {
-        $categoryList = DB::select('select * from categories where is_active=1 ');
+        // Check if the category list exists in the cache
+        if (Cache::has('categoryList')) {
+            // If it does, retrieve it from the cache
+            $categoryList = Cache::get('categoryList');
+        } else {
+            // If it doesn't, fetch it from the database and store it in the cache
+            $categoryList = DB::select('select * from categories where is_active = ?', [1]);
+            Cache::put('categoryList', $categoryList, now()->addMinutes(1)); // Cache for 60 minutes
+        }
+
+        // Return the category list to the view
         return view('categoryList', ['categoryList' => $categoryList]);
     }
 
@@ -46,7 +58,7 @@ class CategoryController extends Controller
     public function deleteCategory($id)
     {
         $category = Category::find($id);
-        $category->is_active =0;
+        $category->is_active = 0;
         $category->save();
         return redirect()->route('viewCategory');
     }
