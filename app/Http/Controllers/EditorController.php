@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\VarDumper\VarDumper;
 use Intervention\Image\Facades\Image;
 
 class EditorController extends Controller
@@ -13,7 +12,6 @@ class EditorController extends Controller
     {
         $cdnEndpoint = config('custom.cdn');
 
-
         // var_dump($request);
 
         $this->validate($request, [
@@ -21,7 +19,7 @@ class EditorController extends Controller
         ]);
 
         $image = $request->file('upload');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = time().'.'.$image->getClientOriginalExtension();
 
         // Resize the image
         $resizedImage = Image::make($image->path());
@@ -30,7 +28,7 @@ class EditorController extends Controller
         });
 
         // Using Laravel's storage system to save the image
-        $path = 'cdn/' . $filename; // Define path within the disk
+        $path = 'cdn/'.$filename; // Define path within the disk
 
         // Choose disk: local, public, or s3
         // $disk = 'public'; // Example: to use the "public" disk
@@ -38,8 +36,6 @@ class EditorController extends Controller
 
         // Save the image to disk
         Storage::disk($disk)->put($path, (string) $resizedImage->encode());
-
-
 
         $CKEditorFuncNum = $request->input('CKEditorFuncNum');
         $url = $cdnEndpoint.$path;
@@ -77,15 +73,12 @@ class EditorController extends Controller
         //Upload File
         // $request->file('upload')->storeAs($path, $filenametostore);
 
-
-
         // temp
         // $i_m_file = $request->file('upload');
         // Storage::disk('b3')->put('/', $i_m_file);
         // $returned_file_name = Storage::disk('local')->put('/', $i_m_file);
         // $url = $subdomain+'/'+.$filenametostore);
         // temp
-
 
     }
 }

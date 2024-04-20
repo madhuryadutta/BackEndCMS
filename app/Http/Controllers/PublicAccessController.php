@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PublicAccessController extends Controller
 {
     public function index()
     {
-
 
         if (Cache::has('contents')) {
             // If it does, retrieve it from the cache
@@ -22,7 +21,6 @@ class PublicAccessController extends Controller
             $contents = DB::select('select * from contents where status="Published" order by updated_at desc');
             Cache::put('contents', $contents, now()->addMinutes(5)); // Cache for 60 minutes
         }
-
 
         // $trackers = $trackers->get();
         return view('welcome', ['contents' => $contents]);

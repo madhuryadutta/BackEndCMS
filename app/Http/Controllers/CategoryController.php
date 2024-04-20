@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -60,12 +59,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->is_active = 0;
         $category->save();
+
         return redirect()->route('viewCategory');
     }
-
-
-
-
 
     // public function destroy($id)
     // {
