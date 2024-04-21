@@ -18,7 +18,7 @@ class CategoryController extends Controller
         } else {
             // If it doesn't, fetch it from the database and store it in the cache
             $categoryList = DB::select('select * from categories where is_active = ?', [1]);
-            Cache::put('categoryList', $categoryList, now()->addMinutes(1)); // Cache for 60 minutes
+            Cache::put('categoryList', $categoryList, now()->addMinutes(1)); // Cache for 1 minutes
         }
 
         // Return the category list to the view

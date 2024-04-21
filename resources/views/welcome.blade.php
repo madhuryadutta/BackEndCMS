@@ -30,11 +30,15 @@
       {{-- <h2>{{$content->title}}</h2> --}}
     </div>
     <small>Posted on {{$content->created_at}}</small>
+    @php
+   $decodedString =  str_replace('\n', '&lt;br&gt;', $content->content_text);
+  //  $decodedString =  str_replace('\"', '', $decodedString);
+    @endphp
     <div class="container">
       {{-- <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode($final)!!}</div> --}}
       <div class="row" style="color: black; font-family: sans-serif;">{!!html_entity_decode('<h1
           style="color: tomato;font-style: oblique;font-family: cursive;">' . $content->title.'</h1><br><br>'
-        .$content->content_text)!!}</span></div>
+        .$decodedString)!!}</span></div>
     </div>
 
 

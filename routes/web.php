@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/install', [SettingController::class, 'install'])->name('install');
 Route::get('/', [PublicAccessController::class, 'index'])->name('welcome');
 
 Route::get('/get_image', function () {
@@ -56,3 +55,10 @@ Route::controller(SettingController::class)->group(function () {
 Route::get('/demo', function () {
     return view('demo');
 });
+
+// Management related
+Route::get('/install', [SettingController::class, 'install'])->name('install');
+Route::get('/artisanCache', [SettingController::class, 'artisanCache'])->name('artisanCache');
+Route::get('/artisanCacheClear', [SettingController::class, 'artisanCacheClear'])->name('artisanCacheClear');
+Route::get('/cache-purge/{key?}', [SettingController::class, 'cachePurge'])->name('cachePurge');
+// Management related

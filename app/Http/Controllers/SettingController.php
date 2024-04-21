@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -29,5 +31,38 @@ class SettingController extends Controller
     public function viewDashboard()
     {
         return view('dashboard');
+    }
+
+    public function cachePurge($key = null)
+    {
+        if ($key = null) {
+            // Clear all items from the cache
+            Cache::flush();
+        } else {
+
+            // Or, if you want to remove a specific item from the cache
+            Cache::forget($key);
+        }
+
+        return redirect('/');
+    }
+
+    public function artisanCache()
+    {
+        // Execute the 'view:cache' Artisan command
+        // Artisan::call('config:cache');
+        Artisan::call('storage:link');
+        // Artisan::call('event:cache');
+        // Artisan::call('route:cache');
+        // return "cached successfully.";
+    }
+
+    public function artisanCacheClear()
+    {
+        // Execute the 'view:cache' Artisan command
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+
+        return 'cached Clear successfully.';
     }
 }

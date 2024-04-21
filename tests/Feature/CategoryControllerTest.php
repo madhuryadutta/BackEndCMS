@@ -4,12 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-
     /**
      * A basic feature test example.
      *
@@ -21,6 +19,7 @@ class CategoryControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
     use RefreshDatabase;
 
     /** @test */

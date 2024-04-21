@@ -5,6 +5,7 @@
    @section('main-section')
 
    <div class="container mt-5 ">
+
      <form enctype="multipart/form-data">
 
        @csrf
@@ -47,33 +48,34 @@
        filebrowserUploadMethod: 'form',
      });
    </script>
-   <script>
-     function myFunction() {
-       var data = CKEDITOR.instances.editor.getData();
-       $.ajax({
-         type: "POST",
-         //  url: "{{route('createContent')}}",
-         // in some situation we get mix content error while using route method  
-         url: "/create_content",
-         data: {
-           "_token": "{{ csrf_token() }}",
-           "post_content": data,
-           "title": document.getElementById("title").value,
-           "category": document.getElementById("category").value,
-         },
-         dataType: "json",
-         success: function(response) {
-           if (response.code == 1) {
-             location.reload();
-           } else {
-             console.log();
-             console.log(response);
-
-             console.log(response.status);
-           }
-         }
-       });
-       console.log(data);
-     }
-   </script>
-   @endsection
+</script>
+@php
+    $tempfix = (env('APP_ENV') === 'local') ? route('createContent') : '/create_content';
+@endphp
+<script>
+    function myFunction() {
+        var data = CKEDITOR.instances.editor.getData();
+        $.ajax({
+            type: "POST",
+            // In some situations, we get a mix content error while using the route method  
+            url: "{{ $tempfix }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "post_content": data,
+                "title": document.getElementById("title").value,
+                "category": document.getElementById("category").value
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.code == 1) {
+                    location.reload();
+                } else {
+                    console.log(response);
+                    console.log(response.status);
+                }
+            }
+        });
+        console.log(data);
+    }
+</script>
+@endsection
