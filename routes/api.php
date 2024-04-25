@@ -3,6 +3,9 @@
 use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/v2', function () {
-    return json_encode(Content::all());
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category', 'index')->name('viewAllCategory');
+    Route::get('/category/{id}', 'show')->name('viewCategory');
+    Route::post('/category', 'store')->name('addCategory');
+    Route::put('/category/{id?}', 'update')->name('editCategory');
+    Route::delete('/category/{id?}', 'destroy')->name('deleteCategory');
 });
