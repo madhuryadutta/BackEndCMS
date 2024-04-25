@@ -50,11 +50,13 @@ class SettingController extends Controller
     public function artisanCache()
     {
         // Execute the 'view:cache' Artisan command
-        // Artisan::call('config:cache');
+        Artisan::call('config:cache');
         Artisan::call('storage:link');
-        // Artisan::call('event:cache');
-        // Artisan::call('route:cache');
-        // return "cached successfully.";
+        Artisan::call('event:cache');
+        Artisan::call('route:cache');
+        Log::debug('Cached Successfully');
+
+        return redirect('/');
     }
 
     public function artisanCacheClear()
@@ -63,6 +65,7 @@ class SettingController extends Controller
         Artisan::call('cache:clear');
         Artisan::call('route:clear');
 
-        return 'cached Clear successfully.';
+        return redirect('/');
+        Log::debug('Cached Cleared Successfully');
     }
 }
