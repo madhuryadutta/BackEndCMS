@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\Content;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HealthCheckController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\CategoryController;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +26,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('/category', 'store')->name('addCategory');
     Route::put('/category/{id?}', 'update')->name('editCategory');
     Route::delete('/category/{id?}', 'destroy')->name('deleteCategory');
+});
+Route::controller(HealthCheckController::class)->group(function () {
+    Route::get('/up', 'check');
 });

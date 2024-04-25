@@ -2,38 +2,41 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         $category = Category::all();
+
         return response()->json($category);
     }
+
     public function show($id)
     {
         $category = Category::find($id);
 
-        if (!empty($category)) {
+        if (! empty($category)) {
             return response()->json($category, 200);
         } else {
-            return response()->json(['message' => "Category Not Found"], 404);
+            return response()->json(['message' => 'Category Not Found'], 404);
         }
     }
+
     public function store(Request $request)
     {
         $category = new Category;
-        $category->parent_id =  $request['parentCategory'];
-        $category->category_name =  $request['categoryName'];
+        $category->parent_id = $request['parentCategory'];
+        $category->category_name = $request['categoryName'];
         $category->is_active = $request['is_active'];
         $category->save();
-        return response()->json(['message' => "Category Added"], 201);
+
+        return response()->json(['message' => 'Category Added'], 201);
     }
+
     public function update(Request $request, $id)
     {
         if (Category::where('id', $id)->exists()) {
@@ -43,11 +46,13 @@ class CategoryController extends Controller
             $category->category_name = is_null($request['categoryName']) ? $category->category_name : $request['categoryName'];
             $category->is_active = is_null($request['is_active']) ? $category->is_active : $request['is_active'];
             $category->save();
-            return response()->json(['message' => "Category Updated"], 200);
+
+            return response()->json(['message' => 'Category Updated'], 200);
         } else {
-            return response()->json(['message' => "Category Not Found"], 404);
+            return response()->json(['message' => 'Category Not Found'], 404);
         }
     }
+
     // Deafult: soft delete
     public function destroy($id)
     {
@@ -55,8 +60,9 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $category->is_active = 0;
             $category->save();
+
             return response()->json([
-                "message" => "category deleted."
+                'message' => 'category deleted.',
             ], 202);
         } else {
             return response()->json(['message' => 'category not found'], 404);
