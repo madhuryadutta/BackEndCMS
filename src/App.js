@@ -17,11 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<PostList />} />
                     <Route path="/post/:postId" element={<PostDetails />} />
-                    <Route
-                        path="/about/:pageName"
-                        element={<RenderPage />}
-                    />{" "}
-                    {/* Use RenderPage component */}
+                    <Route path="/about/:pageName" element={<RenderPage />} />
                 </Routes>
                 <Footer />
                 <ThemeToggle />
