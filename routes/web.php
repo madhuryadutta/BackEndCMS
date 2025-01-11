@@ -47,8 +47,6 @@ Route::post('create_content/{id?}', [ContentController::class, 'create_post'])->
 // Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
 Route::get('single_content/{id}', [ContentController::class, 'singleContent'])->name('singleContent');
 
-
-
 Route::get('/edit_content/{id?}', [ContentController::class, 'edit_post'])->name('editContent');
 
 Route::get('list_content', [ContentController::class, 'listContent'])->name('listContent');
@@ -93,11 +91,9 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/category-recycle-bin', 'viewCategory')->name('category.recycle_bin');
 });
 
-
 Route::get('/post-all', [ContentController::class, 'listContent'])->name('post.all');
 Route::get('/post-waiting-for-approval', [ContentController::class, 'listContent'])->name('post.waiting');
 Route::get('/post-archieve', [ContentController::class, 'listContent'])->name('post.archieve');
 Route::get('/post-recycle-bin', [ContentController::class, 'listContent'])->name('post.recycle_bin');
-
 
 Route::post('abc', [ContentController::class, 'create_post'])->name('save.content');

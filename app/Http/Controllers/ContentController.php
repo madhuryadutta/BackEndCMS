@@ -16,6 +16,7 @@ class ContentController extends Controller
     {
         // $single_content = DB::select('select id, title, user_id, status, updated_at from contents where id=? and user_id=? and (status=? or status=?) order by updated_at desc', [$id, $current_user_id, 'Draft', 'Published']);
         $single_content = DB::select('select * from contents where id=? and (status=? or status=?) order by updated_at desc', [$id, 'Draft', 'Published']);
+
         return view('public_views.postDetails', ['single_content' => $single_content]);
     }
 
@@ -45,7 +46,7 @@ class ContentController extends Controller
         $post = $request['post_content'];
         // temporary fix to image height width issue
         // $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
-        $updated_content_text =  $request['contentToSave'];
+        $updated_content_text = $request['contentToSave'];
         if ($id == null) {
             $content = new Content;
         } else {
@@ -57,14 +58,15 @@ class ContentController extends Controller
         $content->user_id = 1;
         $content->status = 'Published';
         $content->save();
-        $resp_obj = [
-            'status' => 'Success',
-            'code' => 1,
-            'a' => $content
+        // $resp_obj = [
+        //     'status' => 'Success',
+        //     'code' => 1
 
-        ];
+        // ];
+
         return redirect('list_content');
     }
+
     public function edit_post(Request $request, $id)
     {
         $SingleContent = Content::find($id);

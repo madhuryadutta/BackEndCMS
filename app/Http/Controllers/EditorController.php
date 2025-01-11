@@ -8,7 +8,6 @@ use Intervention\Image\Facades\Image;
 
 class EditorController extends Controller
 {
-
     public function upload(Request $request)
     {
 
@@ -30,17 +29,14 @@ class EditorController extends Controller
             // Store the uploaded image locally
             $path = $file->store('ap-northeast-1', 'public');  // Store in the "uploads" directory locally
             // Get the full URL of the file stored locally via the subdomain
-            $url = asset('storage/' . $path);  // Use `asset` to generate the URL
+            $url = asset('storage/'.$path);  // Use `asset` to generate the URL
 
         }
 
         // Return the URL to the client
         return response()->json(['location' => $url]);
 
-
-
-
-        die();
+        exit();
 
         $cdnEndpoint = config('custom.cdn');
 
@@ -51,7 +47,7 @@ class EditorController extends Controller
         ]);
 
         $image = $request->file('upload');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = time().'.'.$image->getClientOriginalExtension();
 
         // Resize the image
         $resizedImage = Image::make($image->path());
@@ -60,7 +56,7 @@ class EditorController extends Controller
         });
 
         // Using Laravel's storage system to save the image
-        $path = 'cdn/' . $filename; // Define path within the disk
+        $path = 'cdn/'.$filename; // Define path within the disk
 
         // Choose disk: local, public, or s3
         // $disk = 'public'; // Example: to use the "public" disk
@@ -70,7 +66,7 @@ class EditorController extends Controller
         Storage::disk($disk)->put($path, (string) $resizedImage->encode());
 
         $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        $url = $cdnEndpoint . $path;
+        $url = $cdnEndpoint.$path;
         // echo $url;
         // $url = asset($path . $filenametostore);
         // $url = url($path . $filenametostore);
@@ -88,21 +84,21 @@ class EditorController extends Controller
 
         // if ($request->hasFile('upload')) {
 
-        //get filename with extension
+        // get filename with extension
         // $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
-        //get filename without extension
+        // get filename without extension
         // $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
 
-        //get file extension
+        // get file extension
         // $extension = $request->file('upload')->getClientOriginalExtension();
 
-        //filename to store
+        // filename to store
         // $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
         // $filenametostore = str_replace(' ', '', $filename) . '_' . time() . '.' . $extension;
 
         $path = 'cdn/';
-        //Upload File
+        // Upload File
         // $request->file('upload')->storeAs($path, $filenametostore);
 
         // temp

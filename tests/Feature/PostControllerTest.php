@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
@@ -15,12 +14,14 @@ class PostControllerTest extends TestCase
      * @return void
      */
     use RefreshDatabase;
+
     public function test_example()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
     }
+
     public function test_can_list_posts()
     {
         Post::factory()->count(10)->create();
