@@ -7,6 +7,6 @@ sudo apt install sqlite3
 yes | php artisan migrate
 php artisan db:seed
 current_dir=$(pwd)
-path="DB_DATABASE=$current_dir/database.sqlite"
-echo "$path" >> .env
+path="DB_DATABASE='$current_dir/database.sqlite"
+echo "$path'" >> .env
 php artisan serve

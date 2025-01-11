@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->string('category_name');
             $table->smallInteger('is_active')->default(1);
+            // "is_active" logic 1 = active , 0 = deactive & 9= delete
             $table->timestamps();
         });
     }
