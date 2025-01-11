@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', [PublicAccessController::class, 'index'])->name('welcome');
+Route::get('/sign-out', [PublicAccessController::class, 'index'])->name('welcome');
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'viewDashboard')->name('adminArea');
     // Route::post('/edit_category/{id?}', 'editCategory')->name('editCategory');
@@ -80,3 +81,41 @@ Route::prefix('admin')->group(
 Route::get('/demo', function () {
     return view('demo');
 });
+Route::get('/my-profile', function () {
+    return view('myProfile');
+});
+
+
+Route::get('/category-all', function () {
+    return view('category'); // Replace 'category.active' with your actual view file
+})->name('category.all');
+
+Route::get('/category-waiting-for-approval', function () {
+    return view('category'); // Replace 'category.waiting' with your actual view file
+})->name('category.waiting');
+
+Route::get('/category-archieve', function () {
+    return view('category'); // Replace 'category.archieve' with your actual view file
+})->name('category.archieve');
+
+Route::get('/category-recycle-bin', function () {
+    return view('category'); // Replace 'category.recycle_bin' with your actual view file
+})->name('category.recycle_bin');
+
+
+
+Route::get('/post-all', function () {
+    return view('post'); // Replace 'category.active' with your actual view file
+})->name('post.all');
+
+Route::get('/post-waiting-for-approval', function () {
+    return view('post'); // Replace 'category.waiting' with your actual view file
+})->name('post.waiting');
+
+Route::get('/post-archieve', function () {
+    return view('post'); // Replace 'category.archieve' with your actual view file
+})->name('post.archieve');
+
+Route::get('/post-recycle-bin', function () {
+    return view('post'); // Replace 'category.recycle_bin' with your actual view file
+})->name('post.recycle_bin');

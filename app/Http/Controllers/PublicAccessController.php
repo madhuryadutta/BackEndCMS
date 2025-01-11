@@ -31,7 +31,7 @@ class PublicAccessController extends Controller
         // }
 
         // $trackers = $trackers->get();
-        return view('welcome', ['contents' => $contents]);
+        return view('dashboard', ['contents' => $contents]);
     }
 
     public function future(Request $request)
