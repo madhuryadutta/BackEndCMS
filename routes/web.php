@@ -42,9 +42,15 @@ Route::get('/101', function () {
 Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
 Route::post('upload', [EditorController::class, 'upload'])->name('upload');
 Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
-Route::post('create_content', [ContentController::class, 'create_post'])->name('createContent');
+Route::post('create_content/{id?}', [ContentController::class, 'create_post'])->name('createContent');
+
 // Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
 Route::get('single_content/{id}', [ContentController::class, 'singleContent'])->name('singleContent');
+
+
+
+Route::get('/edit_content/{id?}', [ContentController::class, 'edit_post'])->name('editContent');
+
 Route::get('list_content', [ContentController::class, 'listContent'])->name('listContent');
 Route::get('delete_content/{id}', [ContentController::class, 'destroy'])->name('deleteContent');
 Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
@@ -59,13 +65,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
     Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
 });
-// Route::controller(ContentController::class)->group(function () {
-//     Route::get('/category', 'viewCategory')->name('viewCategory');
-//     Route::get('/new_category_form', 'newCategoryForm')->name('newCategory');
-//     Route::post('/add_category', 'addCategory')->name('addCategory');
-//     Route::get('/edit_category/{id?}', 'editCategory')->name('editCategory');
-//     Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
-//     Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
+
 // });
 Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
 
@@ -94,24 +94,10 @@ Route::controller(CategoryController::class)->group(function () {
 });
 
 
+Route::get('/post-all', [ContentController::class, 'listContent'])->name('post.all');
+Route::get('/post-waiting-for-approval', [ContentController::class, 'listContent'])->name('post.waiting');
+Route::get('/post-archieve', [ContentController::class, 'listContent'])->name('post.archieve');
+Route::get('/post-recycle-bin', [ContentController::class, 'listContent'])->name('post.recycle_bin');
 
-Route::get('/post-all', function () {
-    return view('post'); // Replace 'category.active' with your actual view file
-})->name('post.all');
 
-Route::get('/post-waiting-for-approval', function () {
-    return view('post'); // Replace 'category.waiting' with your actual view file
-})->name('post.waiting');
-
-Route::get('/post-archieve', function () {
-    return view('post'); // Replace 'category.archieve' with your actual view file
-})->name('post.archieve');
-
-Route::get('/post-recycle-bin', function () {
-    return view('post'); // Replace 'category.recycle_bin' with your actual view file
-})->name('post.recycle_bin');
-
-// Route::get('/abc', function () {
-//     dd($_GET['contentToSave']);
-// })->name('save.content');
 Route::post('abc', [ContentController::class, 'create_post'])->name('save.content');

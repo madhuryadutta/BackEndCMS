@@ -56,6 +56,7 @@
         <tr>
           <th scope="row">{{$i}}</th>
           <td>{{($content->title)}}</td>
+          <td class="limited-content">{{ $content->content_text }}</td>
           <td>{{($content->status)}}</td>
           <td>{{($content->updated_at)}}</td>
           <td><a href="{{route('singleContent',['id'=>$content->id])}}"><button>Edit</button></a></td>

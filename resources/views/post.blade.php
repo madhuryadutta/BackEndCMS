@@ -17,64 +17,41 @@
 
                     <table class="table table-borderless">
                         <thead>
+
                             <tr>
+                                <th scope="col">Sl</th>
                                 <th scope="col">Preview</th>
-                                <th scope="col">Post</th>
-                                <th scope="col">View Count</th>
-                                <th scope="col">Ranking</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Body</th>
+                                <th scope="col">View Count & Ranking</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Created By</th>
+                                <th scope="col">Last updated at</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 1; $i < 5; $i++)
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($contents as $content)
                                 <tr>
-                                    <th scope="row"><a href="#"><img src="assets/img/product-1.jpg"
-                                                alt=""></a>
+                                    <th scope="row">{{ $i }}</th>
+                                    <th scope="row"><a href="{{ route('singleContent', ['id' => $content->id]) }}"><img
+                                                src="assets/img/product-1.jpg" alt=""></a>
                                     </th>
-                                    <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas
-                                            nulla</a></td>
+                                    <td><a href="{{ route('editContent', ['id' => $content->id]) }}"
+                                            class="text-primary fw-bold">{{ $content->title }}</a></td>
+                                    <td class="limited-content"><a
+                                            href="{{ route('editContent', ['id' => $content->id]) }}">{!! $content->content_text !!}</a>
+                                    </td>
                                     <td>64</td>
                                     <td class="fw-bold">124</td>
                                     <td>{{ $i }} abc</td>
                                 </tr>
-                            <tr>
-                                <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a>
-                                </th>
-                                <td><a href="#" class="text-primary fw-bold">Exercitationem similique
-                                        doloremque</a></td>
-                                <td>$46</td>
-                                <td class="fw-bold">98</td>
-                                <td>$4,508</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a>
-                                </th>
-                                <td><a href="#" class="text-primary fw-bold">Doloribus nisi
-                                        exercitationem</a></td>
-                                <td>$59</td>
-                                <td class="fw-bold">74</td>
-                                <td>$4,366</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a>
-                                </th>
-                                <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum
-                                        error</a></td>
-                                <td>$32</td>
-                                <td class="fw-bold">63</td>
-                                <td>$2,016</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a>
-                                </th>
-                                <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus
-                                        repellendus</a></td>
-                                <td>$79</td>
-                                <td class="fw-bold">41</td>
-                                <td>$3,239</td>
-                            </tr>
-                            @endfor
-
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
                         </tbody>
                     </table>
 

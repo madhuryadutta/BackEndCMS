@@ -39,6 +39,23 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+    <style>
+        .limited-content {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Number of lines to display */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .limited-content img {
+            max-width: 100px;
+            /* Set desired maximum width */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 
 <body>
@@ -294,22 +311,27 @@
                 </a>
                 <ul id="Categories-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="category-all">
+                        <a href="/new_category">
+                            <i class="bi bi-circle"></i><span>New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category-all">
                             <i class="bi bi-circle"></i><span>Active</span>
                         </a>
                     </li>
                     <li>
-                        <a href="category-waiting-for-approval">
+                        <a href="/category-waiting-for-approval">
                             <i class="bi bi-circle"></i><span>Waiting For Approval</span>
                         </a>
                     </li>
                     <li>
-                        <a href="category-archieve">
+                        <a href="/category-archieve">
                             <i class="bi bi-circle"></i><span>Archieve</span>
                         </a>
                     </li>
                     <li>
-                        <a href="category-recycle-bin">
+                        <a href="/category-recycle-bin">
                             <i class="bi bi-circle"></i><span>Recycle Bin</span>
                         </a>
                     </li>
@@ -324,22 +346,27 @@
                 </a>
                 <ul id="Post-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="post-all">
+                        <a href="/content_editor">
+                            <i class="bi bi-circle"></i><span>New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/post-all">
                             <i class="bi bi-circle"></i><span>Active</span>
                         </a>
                     </li>
                     <li>
-                        <a href="post-waiting-for-approval">
+                        <a href="/post-waiting-for-approval">
                             <i class="bi bi-circle"></i><span>Waiting For Approval</span>
                         </a>
                     </li>
                     <li>
-                        <a href="post-archieve">
+                        <a href="/post-archieve">
                             <i class="bi bi-circle"></i><span>Archieve</span>
                         </a>
                     </li>
                     <li>
-                        <a href="post-recycle-bin">
+                        <a href="/post-recycle-bin">
                             <i class="bi bi-circle"></i><span>Recycle Bin</span>
                         </a>
                     </li>

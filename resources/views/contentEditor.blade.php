@@ -7,21 +7,26 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Create Content</h5>
-                    <form method="POST" action="{{ route('save.content') }}">
+                    <h5 class="card-title">{{ isset($SingleContent) ? 'Edit Content' : 'Create Content' }}</h5>
+
+                    <form method="POST"
+                        action=" {{ route(isset($SingleContent) ? 'save.content' : 'save.content', isset($SingleContent) ? ['id' => $SingleContent->id] : []) }}">
                         @csrf
                         <!-- TinyMCE Editor -->
 
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <input type="text" class="form-control"name="title" id="title"
-                                    placeholder="Write A suitable Headline for your Content">
+                                    placeholder="Write A suitable Headline for your Content"
+                                    value={{ isset($SingleContent) ? $SingleContent->title : '' }}>
                             </div>
                             <div class="col-md-4">
                                 <select name='category' id="category" class="form-select">
                                     <option>-- Select Category--</option>
                                     @foreach ($categoryOption as $option)
-                                        <option value={{ $option->id }}>{{ $option->category_name }}</option>
+                                        <option value={{ $option->id }}
+                                            {{ isset($SingleContent) && $option->id == $SingleContent->fk_category_id ? 'selected' : '' }}>
+                                            {{ $option->category_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -34,8 +39,7 @@
                         <hr>
 
                         <textarea class="tinymce-editor" name="contentToSave">
-                            <p>Hello World!</p>
-                            <p>This is TinyMCE <strong>full</strong> editor</p>
+                        {{ isset($SingleContent) ? $SingleContent->content_text : '<p>Lets <strong>start</strong> writing</p>' }}
                         </textarea><!-- End TinyMCE Editor -->
                         <button type="submit" class="btn btn-primary mt-3">Save</button>
                     </form>
