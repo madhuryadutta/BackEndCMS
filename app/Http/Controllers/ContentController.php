@@ -36,14 +36,16 @@ class ContentController extends Controller
     {
         $categoryOption = DB::select('select * from categories');
 
-        return view('contentEdit', ['categoryOption' => $categoryOption]);
+        // return view('contentEdit', ['categoryOption' => $categoryOption]);
+        return view('contentEditor', ['categoryOption' => $categoryOption]);
     }
 
     public function create_post(Request $request)
     {
         $post = $request['post_content'];
         // temporary fix to image height width issue
-        $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
+        // $updated_content_text = str_replace('<img', '<img class="my-responsive-image" ', $request['post_content']);
+        $updated_content_text =  $request['contentToSave'];
         $content = new Content;
         $content->fk_category_id = $request['category'];
         $content->title = $request['title'];
@@ -54,29 +56,30 @@ class ContentController extends Controller
         $resp_obj = [
             'status' => 'Success',
             'code' => 1,
+            'a' => $content
 
         ];
         echo json_encode($resp_obj);
     }
 
-    public function upload()
-    {
+    // public function upload()
+    // {
 
-        $response = Http::get('https://meme-api.databytedigital.com/');
-        $url = $response['random_meme'];
+    //     $response = Http::get('https://meme-api.databytedigital.com/');
+    //     $url = $response['random_meme'];
 
-        $remote_image = Http::get($url, [
-            'Content-Type' => 'image/jpeg',
-        ]);
+    //     $remote_image = Http::get($url, [
+    //         'Content-Type' => 'image/jpeg',
+    //     ]);
 
-        $data = ($remote_image->body());
+    //     $data = ($remote_image->body());
 
-        $imageName = time().'.png';
-        $filePath = 'images/'.$imageName;
-        Storage::disk('b3')->put($filePath, $data, 'public');
+    //     $imageName = time() . '.png';
+    //     $filePath = 'images/' . $imageName;
+    //     Storage::disk('b3')->put($filePath, $data, 'public');
 
-        Storage::disk('local')->put($filePath, $data);
-    }
+    //     Storage::disk('local')->put($filePath, $data);
+    // }
 
     // public function view_post()
     // {

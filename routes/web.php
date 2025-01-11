@@ -40,6 +40,7 @@ Route::get('/101', function () {
 });
 
 Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
+Route::post('upload', [EditorController::class, 'upload'])->name('upload');
 Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
 Route::post('create_content', [ContentController::class, 'create_post'])->name('createContent');
 // Route::get('view_post', [ContentController::class, 'view_post'])->name('view_post');
@@ -109,3 +110,8 @@ Route::get('/post-archieve', function () {
 Route::get('/post-recycle-bin', function () {
     return view('post'); // Replace 'category.recycle_bin' with your actual view file
 })->name('post.recycle_bin');
+
+// Route::get('/abc', function () {
+//     dd($_GET['contentToSave']);
+// })->name('save.content');
+Route::post('abc', [ContentController::class, 'create_post'])->name('save.content');
