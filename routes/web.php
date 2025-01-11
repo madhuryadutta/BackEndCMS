@@ -48,35 +48,35 @@ Route::get('list_content', [ContentController::class, 'listContent'])->name('lis
 Route::get('delete_content/{id}', [ContentController::class, 'destroy'])->name('deleteContent');
 Route::get('uploads3', [ContentController::class, 'upload'])->name('uploads3');
 
-Route::prefix('admin')->group(
-    function () {
-        Route::controller(CategoryController::class)->group(function () {
-            Route::get('/category', 'viewCategory')->name('viewCategory');
-            Route::get('/new_category_form', 'newCategoryForm')->name('newCategory');
-            Route::post('/add_category', 'addCategory')->name('addCategory');
-            Route::get('/edit_category/{id?}', 'editCategory')->name('editCategory');
-            Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
-            Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
-        });
-        // Route::controller(ContentController::class)->group(function () {
-        //     Route::get('/category', 'viewCategory')->name('viewCategory');
-        //     Route::get('/new_category_form', 'newCategoryForm')->name('newCategory');
-        //     Route::post('/add_category', 'addCategory')->name('addCategory');
-        //     Route::get('/edit_category/{id?}', 'editCategory')->name('editCategory');
-        //     Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
-        //     Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
-        // });
-        Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
+// Route::prefix('admin')->group(
+//     function () {
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category', 'viewCategory')->name('viewCategory');
+    Route::get('/new_category', 'newCategoryForm')->name('newCategory');
+    Route::post('/add_category', 'addCategory')->name('addCategory');
+    Route::get('/edit_category/{id?}', 'editCategory')->name('editCategory');
+    Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
+    Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
+});
+// Route::controller(ContentController::class)->group(function () {
+//     Route::get('/category', 'viewCategory')->name('viewCategory');
+//     Route::get('/new_category_form', 'newCategoryForm')->name('newCategory');
+//     Route::post('/add_category', 'addCategory')->name('addCategory');
+//     Route::get('/edit_category/{id?}', 'editCategory')->name('editCategory');
+//     Route::post('/update_category/{id?}', 'updateCategory')->name('updateCategory');
+//     Route::get('/delete_category/{id?}', 'deleteCategory')->name('deleteCategory');
+// });
+Route::get('content_editor', [ContentController::class, 'index'])->name('contentEditor');
 
-        // Management related
-        Route::get('/install', [SettingController::class, 'install'])->name('install');
-        Route::get('/artisanCache', [SettingController::class, 'artisanCache'])->name('artisanCache');
-        Route::get('/artisanCacheClear', [SettingController::class, 'artisanCacheClear'])->name('artisanCacheClear');
-        Route::get('/cache-purge/{key?}', [SettingController::class, 'cachePurge'])->name('cachePurge');
-        // Management related
-    }
+// Management related
+Route::get('/install', [SettingController::class, 'install'])->name('install');
+Route::get('/artisanCache', [SettingController::class, 'artisanCache'])->name('artisanCache');
+Route::get('/artisanCacheClear', [SettingController::class, 'artisanCacheClear'])->name('artisanCacheClear');
+Route::get('/cache-purge/{key?}', [SettingController::class, 'cachePurge'])->name('cachePurge');
+// Management related
+//     }
 
-);
+// );
 
 Route::get('/demo', function () {
     return view('demo');
@@ -85,22 +85,12 @@ Route::get('/my-profile', function () {
     return view('myProfile');
 });
 
-
-Route::get('/category-all', function () {
-    return view('category'); // Replace 'category.active' with your actual view file
-})->name('category.all');
-
-Route::get('/category-waiting-for-approval', function () {
-    return view('category'); // Replace 'category.waiting' with your actual view file
-})->name('category.waiting');
-
-Route::get('/category-archieve', function () {
-    return view('category'); // Replace 'category.archieve' with your actual view file
-})->name('category.archieve');
-
-Route::get('/category-recycle-bin', function () {
-    return view('category'); // Replace 'category.recycle_bin' with your actual view file
-})->name('category.recycle_bin');
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category-all', 'viewCategory')->name('category.all');
+    Route::get('/category-waiting-for-approval', 'viewCategory')->name('category.waiting');
+    Route::get('/category-archieve', 'viewCategory')->name('category.archieve');
+    Route::get('/category-recycle-bin', 'viewCategory')->name('category.recycle_bin');
+});
 
 
 

@@ -22,14 +22,17 @@ class CategoryController extends Controller
         // }
 
         // Return the category list to the view
-        return view('categoryList', ['categoryList' => $categoryList]);
+        // return view('categoryList', ['categoryList' => $categoryList]);
+        return view('category', ['categoryList' => $categoryList]);
     }
 
     public function newCategoryForm()
     {
         $categoryOption = DB::select('select * from categories where is_active = ? ', [1]);
 
-        return view('formCategory', ['categoryList' => $categoryOption]);
+        // return view('formCategory', ['categoryList' => $categoryOption]);
+        return view('categoryEdit', ['categoryList' => $categoryOption]);
+
     }
 
     public function addCategory(Request $request)
@@ -49,7 +52,8 @@ class CategoryController extends Controller
         $currentCategory = Category::find($id);
         $categoryOption = DB::select('select * from categories');
 
-        return view('formCategoryUpdate', ['categoryList' => $categoryOption, 'currentCategory' => $currentCategory]);
+        // return view('formCategoryUpdate', ['categoryList' => $categoryOption, 'currentCategory' => $currentCategory]);
+        return view('categoryEdit', ['categoryList' => $categoryOption, 'currentCategory' => $currentCategory]);
     }
 
     public function updateCategory(Request $request, $id)

@@ -19,53 +19,42 @@
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
-                                <th scope="col">Cat ID</th>
-                                <th scope="col">Created BY</th>
+                                <th scope="col">Sl</th>
                                 <th scope="col">Category name</th>
+                                <th scope="col">Category level</th>
+                                <th scope="col">Created at</th>
                                 <th scope="col">Ranking</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            @for ($i = 1; $i < 5; $i++)
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($categoryList as $category)
                                 <tr>
-                                    <th scope="row"><a href="#">#{{ $i }}2457</a></th>
-                                    <td>Brandon Jacob</td>
-                                    <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                    <td>#64</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
+                                    <th scope="row"><a href="#">#{{ $i }}</a></th>
+                                    <td><a href="{{ route('editCategory', ['id' => $category->id]) }}"
+                                            class="text-primary">{{ $category->category_name }} </a>
+                                    </td>
+                                    <td>
+                                        @if ($category->parent_id == 0)
+                                            Main Category
+                                        @else
+                                            Sub Category
+                                        @endif
+                                    </td>
+                                    <td>{{ $category->created_at }}</td>
+                                    <td>#{{ $i }}</td>
+                                    <td><span class="badge bg-success">
+                                            @if ($category->is_active == 1)
+                                                Active
+                                            @else
+                                                Inactive
+                                            @endif
+                                        </span></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2147</a></th>
-                                    <td>Bridie Kessler</td>
-                                    <td><a href="#" class="text-primary">Blanditiis dolor omnis
-                                            similique</a></td>
-                                    <td>#47</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2049</a></th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                    <td>#147</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2644</a></th>
-                                    <td>Angus Grady</td>
-                                    <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                    <td>#67</td>
-                                    <td><span class="badge bg-danger">Rejected</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><a href="#">#2644</a></th>
-                                    <td>Raheem Lehner</td>
-                                    <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                    <td>#165</td>
-                                    <td><span class="badge bg-success">Approved</span></td>
-                                </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>
 
