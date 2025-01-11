@@ -24,8 +24,9 @@ class ContentController extends Controller
 
     public function listContent()
     {
-        $current_user_id = 9999;
-        $contents = DB::select('select id, title, user_id, status, updated_at from contents where user_id=? and (status=? or status=?) order by updated_at desc ', [$current_user_id, 'Draft', 'Published']);
+        // $current_user_id = 9999;
+        // $contents = DB::select('select id, title, user_id, status, updated_at from contents where user_id=? and (status=? or status=?) order by updated_at desc ', [$current_user_id, 'Draft', 'Published']);
+        $contents = DB::select('select id, title, user_id, status, updated_at from contents where (status=? or status=?) order by updated_at desc ', ['Draft', 'Published']);
 
         // $trackers = $trackers->get();
         return view('listContent', ['contents' => $contents]);
@@ -86,4 +87,14 @@ class ContentController extends Controller
     //     // $trackers = $trackers->get();
     //     return view('welcome', ['trackers' => $trackers]);
     // }
+    public function destroy($id)
+    {
+        $content = Content::find($id);
+        if (! empty($content)) {
+            $content->status = 'Deleted';
+            $content->save();
+        }
+
+        return redirect()->route('listContent');
+    }
 }

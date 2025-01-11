@@ -9,7 +9,7 @@
   <div class="container">
     <div class="container">
       <h1>Manage Category </h1>
-      <a href="{{route('addCategory')}}"> <span style="float:right"><button>New Category</button></span></a>
+      <a href="{{route('newCategory')}}"> <span style="float:right"><button>New Category</button></span></a>
     </div>
   </div>
   <div class="container">

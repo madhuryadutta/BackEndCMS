@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\HealthCheckController;
+use App\Http\Controllers\HealthCheckController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,7 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(HealthCheckController::class)->group(function () {
     Route::get('/up', 'check');
 });
+Route::get('/health', [HealthCheckController::class, 'getHealthStatus']);
+Route::post('/health', [HealthCheckController::class, 'getHealthStatus']);
+
+Route::apiResource('posts', PostController::class);

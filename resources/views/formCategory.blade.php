@@ -9,13 +9,13 @@
   <div class="container">
   <div class="container">
     <h1>manage categories</h1>
-    <form enctype="multipart/form-data" method="POST" action="{{route('editCategory')}}">
+    <form enctype="multipart/form-data" method="POST" action="{{route('addCategory')}}">
       @csrf
       <div class="form-group">
         <label for="exampleFormControlSelect1">Parent Category</label>
         <select class="form-control" id="exampleFormControlSelect1" name="parentCategory">
           <option value="0">Not applicable</option>
-          @foreach ($categoryOption as $option)
+          @foreach ($categoryList as $option)
           <option value={{($option->id)}}>{{($option->category_name)}}</option>
           @endforeach
           

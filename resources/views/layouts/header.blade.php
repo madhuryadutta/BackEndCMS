@@ -2,7 +2,7 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-  <script src="asset/js/color-modes.js"></script>
+  <script src="/asset/js/color-modes.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   @stack('title')
@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-  <link href="asset/css/navbar-static.css" rel="stylesheet">
+  <link href="/asset/css/navbar-static.css" rel="stylesheet">
 
 
   <style>
@@ -161,19 +161,25 @@
           {{-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li> --}}
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" href="{{route('contentEditor')}}">New Content</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('viewCategory')}}">Category</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="{{route('adminArea')}}">Admin Dashboard</a>
           </li>
-          
-          <li class="nav-item">
+          <!-- New list item for GitHub icon and link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/madhuryadutta/BackEndCMS" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </li>
+          {{-- <li class="nav-item">
             <a class="nav-link" href="/">Link</a>
-          </li>
+          </li> --}}
           {{-- <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li> --}}

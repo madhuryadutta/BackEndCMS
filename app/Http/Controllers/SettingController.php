@@ -28,11 +28,6 @@ class SettingController extends Controller
         }
     }
 
-    public function viewDashboard()
-    {
-        return view('dashboard');
-    }
-
     public function cachePurge($key = null)
     {
         if ($key = null) {

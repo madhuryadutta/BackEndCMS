@@ -58,8 +58,9 @@
           <td>{{($content->title)}}</td>
           <td>{{($content->status)}}</td>
           <td>{{($content->updated_at)}}</td>
-          <td><a href="{{route('singleContent',['id'=>$content->id])}}"><button>Edit</button></a>
-         <button>Delete</button></td>
+          <td><a href="{{route('singleContent',['id'=>$content->id])}}"><button>Edit</button></a></td>
+                  <td><a href="{{route('deleteContent',['id'=>$content->id])}}">
+            <button>Delete</button></td>
         </tr>
         @php
         $i++;

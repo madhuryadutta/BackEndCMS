@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id')->default(0);
-            $table->string('category_name');
-            $table->smallInteger('is_active')->default(1);
-            // "is_active" logic 1 = active , 0 = deactive & 9= delete
+            $table->string('title');
+            $table->text('body');
+            $table->json('tags')->nullable();
+            $table->json('reactions')->nullable();
+            $table->integer('views')->default(0);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('posts');
     }
 };
