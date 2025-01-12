@@ -32,7 +32,6 @@ class CategoryController extends Controller
 
         // return view('formCategory', ['categoryList' => $categoryOption]);
         return view('categoryEdit', ['categoryList' => $categoryOption]);
-
     }
 
     public function addCategory(Request $request)
