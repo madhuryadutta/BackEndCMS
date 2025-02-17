@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
-use Symfony\Component\HttpFoundation\Response;
-use Swift_SmtpTransport;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Swift_Mailer;
 use Swift_Message;
-use Illuminate\Support\Facades\Http;
+use Swift_SmtpTransport;
+use Symfony\Component\HttpFoundation\Response;
 
 class HealthCheckController extends Controller
 {
     public function getHealthStatus()
     {
         $status = [];
-
 
         // HTTP and Web Server Status
         try {
@@ -62,18 +61,16 @@ class HealthCheckController extends Controller
                     'request_method' => $requestMethod,
                     'request_time' => date('Y-m-d H:i:s', $requestTime),
                     'http_host' => $httpHost,
-                ]
+                ],
             ];
         } catch (\Exception $e) {
             $status['http'] = [
                 'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status_level' => 'error',
                 'status_message' => 'HTTP service failed',
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ];
         }
-
-
 
         // Database Status
         try {
@@ -82,14 +79,14 @@ class HealthCheckController extends Controller
                 'status_code' => Response::HTTP_OK,
                 'status_level' => 'operational',
                 'status_message' => 'Database connection is working',
-                'data' => null
+                'data' => null,
             ];
         } catch (\Exception $e) {
             $status['database'] = [
                 'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status_level' => 'error',
                 'status_message' => 'Database connection failed',
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ];
         }
 
@@ -138,7 +135,6 @@ class HealthCheckController extends Controller
             ];
         }
 
-
         // Cache Status
         try {
             // Try setting and getting a cache value to verify cache functionality
@@ -154,14 +150,14 @@ class HealthCheckController extends Controller
                     'status_code' => Response::HTTP_OK,
                     'status_level' => 'operational',
                     'status_message' => 'Cache service is working',
-                    'data' => 'Cache is operational'
+                    'data' => 'Cache is operational',
                 ];
             } else {
                 $status['cache'] = [
                     'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                     'status_level' => 'error',
                     'status_message' => 'Cache service is not working properly',
-                    'data' => 'Failed to retrieve cache value'
+                    'data' => 'Failed to retrieve cache value',
                 ];
             }
 
@@ -172,18 +168,16 @@ class HealthCheckController extends Controller
                 'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status_level' => 'error',
                 'status_message' => 'Cache service failed',
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ];
         }
-
-
 
         // Default Filesystem Status with Load and Read/Write Speed
         try {
             $defaultDisk = Config::get('filesystems.default');
             $filesystemConfig = Config::get("filesystems.disks.$defaultDisk");
 
-            if (!$filesystemConfig) {
+            if (! $filesystemConfig) {
                 throw new \Exception("Default filesystem '$defaultDisk' is not configured properly.");
             }
 
@@ -224,12 +218,12 @@ class HealthCheckController extends Controller
                 'status_level' => 'operational',
                 'status_message' => "Default filesystem '$defaultDisk' is accessible and working.",
                 'data' => [
-                    'disk_usage_percentage' => round($diskUsagePercentage, 2) . '%',
+                    'disk_usage_percentage' => round($diskUsagePercentage, 2).'%',
                     'disk_free_space' => $this->formatBytes($diskFreeSpace),
                     'disk_used_space' => $this->formatBytes($diskUsedSpace),
                     'disk_total_space' => $this->formatBytes($diskTotalSpace),
-                    'write_speed' => $writeSpeed . ' MB/s',
-                    'read_speed' => $readSpeed . ' MB/s',
+                    'write_speed' => $writeSpeed.' MB/s',
+                    'read_speed' => $readSpeed.' MB/s',
                 ],
             ];
         } catch (\Exception $e) {
@@ -240,8 +234,6 @@ class HealthCheckController extends Controller
                 'data' => $e->getMessage(),
             ];
         }
-
-
 
         // S3 Status
         try {
@@ -272,20 +264,17 @@ class HealthCheckController extends Controller
             $status['s3'] = [
                 'status_code' => 500,
                 'status_level' => 'error',
-                'status_message' => 'S3 service failed: ' . $e->getMessage(),
+                'status_message' => 'S3 service failed: '.$e->getMessage(),
                 'data' => null,
             ];
         }
-
-
-
 
         // PHP Version
         $status['php_version'] = [
             'status_code' => Response::HTTP_OK,
             'status_level' => 'operational',
             'status_message' => 'PHP version retrieved',
-            'data' => phpversion()
+            'data' => phpversion(),
         ];
 
         // Server Uptime
@@ -294,7 +283,7 @@ class HealthCheckController extends Controller
             'status_code' => Response::HTTP_OK,
             'status_level' => 'operational',
             'status_message' => 'Server uptime retrieved',
-            'data' => $uptime
+            'data' => $uptime,
         ];
 
         // System Resource Status
@@ -322,24 +311,24 @@ class HealthCheckController extends Controller
                         'free_space' => $this->formatBytes($diskFree),
                         'total_space' => $this->formatBytes($diskTotal),
                         'used_space' => $this->formatBytes($diskUsage),
-                        'usage_percentage' => round($diskUsagePercentage, 2) . '%'
+                        'usage_percentage' => round($diskUsagePercentage, 2).'%',
                     ],
                     'memory' => [
                         'memory_usage' => $this->formatBytes($memoryUsage),
                         'memory_peak_usage' => $this->formatBytes($memoryPeakUsage),
-                        'memory_limit' => $memoryLimit
+                        'memory_limit' => $memoryLimit,
                     ],
                     'cpu' => [
-                        'cpu_usage' => $cpuUsage // Assuming this returns a formatted string or array
-                    ]
-                ]
+                        'cpu_usage' => $cpuUsage, // Assuming this returns a formatted string or array
+                    ],
+                ],
             ];
         } catch (\Exception $e) {
             $status['system_resources'] = [
                 'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status_level' => 'error',
                 'status_message' => 'Failed to retrieve system resources',
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ];
         }
         // System Resource Status
@@ -367,24 +356,24 @@ class HealthCheckController extends Controller
                         'free_space' => $this->formatBytes($diskFree),
                         'total_space' => $this->formatBytes($diskTotal),
                         'used_space' => $this->formatBytes($diskUsage),
-                        'usage_percentage' => round($diskUsagePercentage, 2) . '%'
+                        'usage_percentage' => round($diskUsagePercentage, 2).'%',
                     ],
                     'memory' => [
                         'memory_usage' => $this->formatBytes($memoryUsage),
                         'memory_peak_usage' => $this->formatBytes($memoryPeakUsage),
-                        'memory_limit' => $memoryLimit
+                        'memory_limit' => $memoryLimit,
                     ],
                     'cpu' => [
-                        'cpu_usage' => $cpuUsage // Assuming this returns a formatted string or array
-                    ]
-                ]
+                        'cpu_usage' => $cpuUsage, // Assuming this returns a formatted string or array
+                    ],
+                ],
             ];
         } catch (\Exception $e) {
             $status['system_resources'] = [
                 'status_code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status_level' => 'error',
                 'status_message' => 'Failed to retrieve system resources',
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ];
         }
         // System Load
@@ -393,7 +382,7 @@ class HealthCheckController extends Controller
             'status_code' => Response::HTTP_OK,
             'status_level' => 'operational',
             'status_message' => 'System load retrieved',
-            'data' => $load
+            'data' => $load,
         ];
         // Laravel Environment
         $status['environment'] = [
@@ -403,8 +392,8 @@ class HealthCheckController extends Controller
             'data' => [
                 'app_environment' => env('APP_ENV'),
                 'app_debug' => env('APP_DEBUG'),
-                'app_url' => env('APP_URL')
-            ]
+                'app_url' => env('APP_URL'),
+            ],
         ];
 
         // IP Information
@@ -413,13 +402,11 @@ class HealthCheckController extends Controller
             'status_code' => Response::HTTP_OK,
             'status_level' => 'operational',
             'status_message' => 'IP information retrieved',
-            'data' => $ipInformation
+            'data' => $ipInformation,
         ];
 
         return response()->json($status);
     }
-
-
 
     private function formatBytes($bytes, $precision = 2)
     {
@@ -429,7 +416,8 @@ class HealthCheckController extends Controller
         $pow = min($pow, count($units) - 1);
 
         $bytes /= pow(1024, $pow);
-        return round($bytes, $precision) . ' ' . $units[$pow];
+
+        return round($bytes, $precision).' '.$units[$pow];
     }
 
     private function getServerUptime()
@@ -438,6 +426,7 @@ class HealthCheckController extends Controller
             return 'Server uptime check is not supported on Windows.';
         } else {
             $uptime = shell_exec('uptime -p');
+
             return $uptime ? trim($uptime) : 'Unable to get server uptime.';
         }
     }
@@ -448,7 +437,8 @@ class HealthCheckController extends Controller
             return 'CPU usage check is not supported on Windows.';
         } else {
             $cpuUsage = shell_exec("top -bn1 | grep 'Cpu(s)' | sed \"s/.*, *\\([0-9.]*\\)%* id.*/\\1/\" | awk '{print 100 - $1}'");
-            return $cpuUsage ? trim($cpuUsage) . '%' : 'Unable to get CPU usage.';
+
+            return $cpuUsage ? trim($cpuUsage).'%' : 'Unable to get CPU usage.';
         }
     }
 
@@ -477,6 +467,7 @@ class HealthCheckController extends Controller
     private function getPublicIp()
     {
         $ip = file_get_contents('https://api.ipify.org');
+
         return $ip ? trim($ip) : 'Unable to retrieve public IP.';
     }
 }
